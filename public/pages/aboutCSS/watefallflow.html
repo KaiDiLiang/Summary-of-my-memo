@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS实现瀑布流图片</title>
+</head>
+<style type="text/css">
+  html,body,li,ul,ol,p,div {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 16px;
+    text-align: center;
+  }
+  .container {
+    column-width: 100%;
+    -webkit-column-width: 250px;
+    -webkit-column-gap: 10px;
+    column-gap: 10px;
+  }
+  .container div {
+    width: 100%;
+    height: 200px;
+    margin: 5px 0;
+    /* 限定盒子内放大 */
+    /* overflow: hidden; */
+  }
+  .container img {
+    width: 100%;
+    height: 100%;
+    /* 规定显示的光标形状 */
+    cursor: pointer;
+    /* 过渡属性，动态效果过渡时间 */
+    transition: all 0.6s;
+  }
+  .container img:hover {
+    /* 元素应用2D或3D转换 */
+    transform: scale(1.4);
+  }
+</style>
+<body>
+  <div class="container">
+    <div>
+      <img src="../../pictures/watefallflow-img/watefallflow2.png">
+      <p>标签</p>
+    </div>
+    <div>
+      <img src="../../pictures/watefallflow-img/watefallflow3.png">
+      <p>标签</p>  
+    </div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow4.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow5.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow6.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow7.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow8.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow9.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow10.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow11.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow12.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow13.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow14.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow15.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow16.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow17.png"></div>
+    <div><img src="../../pictures/watefallflow-img/watefallflow18.png"></div>
+</body>
+</html>
