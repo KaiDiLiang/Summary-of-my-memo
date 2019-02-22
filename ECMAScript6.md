@@ -16,5 +16,18 @@
   ### **默认参数:** default
   ### **:** rest arguments
   
-***以下是示例***
-  **let, const**
+## ***以下是示例***
+  ### **变量：** let, const
+  
+  #### 这两个的用途与var类似，都是用来声明变量的，但在实际运用中有其各自的特性。
+  
+  `var name = 'aaa';
+  
+  while(true) {
+    var name = 'oba';
+    console.log(name);  // oba
+    break;
+  }
+  
+  console.log(name);  // oba
+  `
