@@ -11,5 +11,10 @@
   ### **类：** class
   ### **继承：** extends， super(超类)
   ### **箭头函数：** arrow function
-  ### **字符串模板:** `可以换行写字符串`
-  ### **
+  ### **字符串模板:** `(``)可以换行写字符串`
+  ### **函数解构：** destructuring
+  ### **默认参数:** default
+  ### **:** rest arguments
+  
+***以下是示例***
+  **let, const**
