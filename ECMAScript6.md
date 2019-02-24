@@ -66,15 +66,15 @@
          a[6]();  // 6
    
    
-####如果不使用ES6，而用闭包该如何解决下面的问题呢？ 
-        // 期待点击不同的clickBox,显示不同的i，但实际无论点击哪个clickBox，输出都为5
+#### 如果不使用ES6，而用闭包该如何解决下面的问题呢？ 
         ```
-        var clickBoxs = document.querySelectorAll('.clickBox');
-        for (var i = 0; i < clickBoxs.length; i++) {
-          clickBoxs[i].onclick = function () {
-            console.log(i);
+          // 期待点击不同的clickBox,显示不同的i，但实际无论点击哪个clickBox，输出都为5
+          var clickBoxs = document.querySelectorAll('.clickBox');
+          for (var i = 0; i < clickBoxs.length; i++) {
+            clickBoxs[i].onclick = function () {
+              console.log(i);
+            }
           }
-        }
         ```
    ##### 用闭包解决
         function iteratorFactory (i) {
@@ -95,9 +95,8 @@
         PI = 23;  // Module build failed: SyntaxError: /es6/app.js: "PI" is read-only
         
   ##### 当尝试去改变用const声明的常量时，浏览器就会报错。</br>
-  **const有个好应用场景，就是引用第三方库的变量时，用const来声明可以避免重命名而导致的bug**
-        ```
-        const monent = require('moment')
-        ```
+  **const有个好应用场景，就是引用第三方库的变量时，用const来声明可以避免重命名而导致的bug**</br>
+         
+         const monent = require('moment')
         
  ### **class, extends, super**      
