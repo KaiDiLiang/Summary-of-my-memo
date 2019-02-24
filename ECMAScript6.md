@@ -20,7 +20,7 @@
   ### **变量：** let, const
    #### 这两个的用途与var类似，都是用来声明变量的，但在实际运用中有其各自的特性。
   
-        ```
+        ```javascript
         var name = 'aaa';
 
         while(true) {
