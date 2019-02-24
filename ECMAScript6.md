@@ -4,7 +4,7 @@
 
 ### Babel是一个广泛使用的ES6转码器，可以将ES6转ES5，从而在现有浏览器环境执行。
 
-**Babel官网 https://babeljs.io/docs/setup/**
+**[Babel官网](https://babeljs.io/docs/setup/)**
 
 ## **最常用的ES6特性**
   ### **变量：** let, const
