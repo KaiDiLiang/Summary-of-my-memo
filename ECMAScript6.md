@@ -16,6 +16,7 @@
   ### **默认参数:** default
   ### **:** rest arguments
   
+  
 ## ***以下是示例***
   ### **变量：** let, const
    ##### 这两个的用途与var类似，都是用来声明变量的，但在实际运用中有其各自的特性。
@@ -99,4 +100,29 @@
          
          const monent = require('moment')
         
- ### **class, extends, super**      
+ ### **类：class, 继承：extends, 超类：super**
+  ###### ES6 引入了Class（类）这个概念，新的class写法让对象原型的写法更清晰、更像面向对象编程的语法。
+         
+         class Animal {
+            constructor () {
+                this.type = 'animal';
+            }
+            says (say) {
+                console.log(this.type + 'says' + say)
+            }
+         }
+         
+         let animal = new Animal();
+         animal.says('hello');  // animal says hello
+         
+         class Cat extends Animal {
+            constructor () {
+                super();
+                this.type = 'cat';
+            }
+         }
+
+         let cat = new Cat();
+         cat.says('hello');   // cat says hello
+         
+  ###### 以上代码用**class**定义了一个“类”，
