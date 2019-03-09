@@ -41,8 +41,15 @@
 ##### ( 在组件内使用 ``vm.$nextTick(callback) 实例方法`` 更好，因为它 ``不需要全局 Vue ，且回调函数中的 this 将自动绑定到当前的 Vue 实例上`` ) 
 ##### ( ``$nextTick() 返回一个 Promise 对象`` ，所以可以使用新的 ES2016 async/await 语法完成相同的事情 ) 
 ###### ( ***不能在选项属性或回调上使用箭头函数*** ，如 
-            ``created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())``  
-   ###### 因为 ``箭头函数是和父级上下文绑定在一起的`` ， ``this`` ``指向的不是如你所预期的 Vue 实例`` ，经常导致 Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误 )
+            created: () => console.log(this.a)   
+             或    
+            vm.$watch('a', newValue => this.myMethod())    
+           
+###### 因为 ``箭头函数是和父级上下文绑定在一起的`` ， ``this 指向的不是如你所预期的 Vue 实例`` ，经常导致  
+            Uncaught TypeError: Cannot read property of undefined  
+            或 
+            Uncaught TypeError: this.myMethod is not a function 之类的错误 )
+      
       ``  
       <!DOCTYPE html>
       <html lang="en">
