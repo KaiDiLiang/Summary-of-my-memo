@@ -37,4 +37,53 @@
       this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })  
       
       ``
+#### 为了在数据变化之后等待 Vue 完成更新 DOM ，可以在 ``数据变化之后`` 立即使用 `` Vue.nextTick(callback) ``, 这样 ``回调函数`` 在 ``DOM 更新完成后`` 就会调用。  
+##### ( 在组件内使用 ``vm.$nextTick(callback) 实例方法`` 更好，因为它 ``不需要全局 Vue ，且回调函数中的 this 将自动绑定到当前的 Vue 实例上`` ) 
+##### ( ``$nextTick() 返回一个 Promise 对象``，所以可以使用新的 ES2016 async/await 语法完成相同的事情 ) 
+###### ( 注意mounted的function不能用箭头函数写，会报错（原因未知） )
+      ``  
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>vue异步更新</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
+      </head>
+      <body>
+        <div id="app">
+          <h1>{{message}}</h1>
+          <example></example>
+        </div>
+      </body>  
+      
+      <script>
+        Vue.component('example', {
+            template: '<span>{{msn}}</span>',
+            data: () => {
+               return{
+                  msn: '更新了？'
+               }
+            },
+            mounted: async function() {
+                  console.log(1)
+                  this.msn = '更新好了'
+                  console.log(this.$el.textContent)	// data数据未刷新
+                  await this.$nextTick(() => {
+                        console.log(this.$el.textContent)	// data数据刷新了
+                  })
+            }	
+        }),
+        new Vue({
+          el: '#app',
+          data: {
+            message: 'Vue的异步更新'
+          }
 
+        })
+      </script>
+      </html> 
+      
+      ``
+      
