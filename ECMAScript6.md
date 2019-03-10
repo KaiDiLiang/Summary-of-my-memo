@@ -7,18 +7,18 @@
 **[Babel官网](https://babeljs.io/docs/setup/)**
 
 ## **最常用的ES6特性**
-  ### **``变量：``** ``let, const``  
-  ### **``类：``** ``class``  
-  ### **``继承：``** ``extends， super(超类)`` 
-  ### **``箭头函数：``** ``arrow function``    
-  ### **``字符串模板:``** ` \`` 可以换行写字符串`
-  ### **``函数解构：``** ``destructuring`` 
-  ### **``默认参数:``** ``default``
-  ### **``:``** rest arguments
+  ### **``变量`` ：** ``let, const``  
+  ### **``类`` ：** ``class``  
+  ### **``继承`` ：** ``extends， super(超类)`` 
+  ### **``箭头函数`` ：** ``arrow function``    
+  ### **``字符串模板`` :** ` \`` 可以换行写字符串`
+  ### **``函数解构`` ：** ``destructuring`` 
+  ### **``默认参数`` :** ``default``
+  ### **``?`` :** rest arguments
   
   
 ## ***以下是示例***
-  ### **``变量：``** ``let, const``  
+  ### **``变量``：** ``let`` , ``const``  
    ##### 这两个的用途与var类似，都是用来声明变量的，但在实际运用中有其各自的特性。
   
         var name = 'aaa';
@@ -100,7 +100,7 @@
          
          const monent = require('moment')
         
- ### **``类：`` ``class`` , ``继承：`` ``extends`` , ``超类：`` ``super``**
+ ### **``类`` ： ``class`` , ``继承`` ： ``extends`` , ``超类`` ： ``super``**
   ###### ES6 引入了Class（类）这个概念，新的class写法让对象原型的写法更清晰、更像面向对象编程的语法。
          
          class Animal {
@@ -125,4 +125,4 @@
          let cat = new Cat();
          cat.says('hello');   // cat says hello
          
-  ###### 以上代码用**class**定义了一个“类”，
+  ###### 以上代码用``**class**``定义了一个“类”，
