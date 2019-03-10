@@ -44,7 +44,8 @@
             created: () => console.log(this.a)   
              或    
             vm.$watch('a', newValue => this.myMethod())          
-###### 容易导致 ``Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误 )``
+###### 容易导致 ``Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误 )``  
+###### ( 所有的方法都应该在methods里定义，然后在created或者mounted里 使用this调用方法，用这种方式实现初始化 )
               
             
              
