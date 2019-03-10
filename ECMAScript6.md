@@ -2,23 +2,23 @@
 
 ##### 目前不是所有的浏览器都能兼容ES6全部特性，所以得了解一下Babel。
 
-#### Babel是一个广泛使用的ES6转码器，可以将ES6转ES5，从而在现有浏览器环境执行。
+#### ``Babel`` 是一个广泛使用的ES6转码器，可以将ES6转ES5，从而在现有浏览器环境执行。
 
 **[Babel官网](https://babeljs.io/docs/setup/)**
 
 ## **最常用的ES6特性**
-  ### **变量：** let, const
-  ### **类：** class
-  ### **继承：** extends， super(超类)
-  ### **箭头函数：** arrow function
-  ### **字符串模板:** `(``)可以换行写字符串`
-  ### **函数解构：** destructuring
-  ### **默认参数:** default
-  ### **:** rest arguments
+  ### **``变量：``** ``let, const``  
+  ### **``类：``** ``class``  
+  ### **``继承：``** ``extends， super(超类)`` 
+  ### **``箭头函数：``** ``arrow function``    
+  ### **``字符串模板:``** ` \`` 可以换行写字符串`
+  ### **``函数解构：``** ``destructuring`` 
+  ### **``默认参数:``** ``default``
+  ### **``:``** rest arguments
   
   
 ## ***以下是示例***
-  ### **变量：** let, const
+  ### **``变量：``** ``let, const``  
    ##### 这两个的用途与var类似，都是用来声明变量的，但在实际运用中有其各自的特性。
   
         var name = 'aaa';
@@ -31,8 +31,8 @@
 
         console.log(name);  // oba
       
-   ##### 使用var两次输出都是oba,这是因为ES5只有全局作用域和函数作用域，没有块状作用域的概念，这带来了很多不合理的场景。
-   ##### 第一种是：内层变量覆盖外层变量。而let则实际上为JavaScript新增了块状作用域，用它声明的变量，只在let所在的代码块内有效。
+   ##### 使用var两次输出都是oba,这是因为 ``ES5只有全局作用域和函数作用域，没有块状作用域的概念`` ，这带来了很多不合理的场景。
+   ##### 第一种是：内层变量覆盖外层变量。而 ``let则实际上为JavaScript新增了块状作用域，用它声明的变量，只在let所在的代码块内有效`` 。
        
        let name = 'aaa';
 
@@ -90,17 +90,17 @@
           clickBoxs[i].onclick = iteratorFactory(i);
         }
   
- #### **const也可以用来声明变量，但是声明的是常量。常量一旦声明，其值就不可再更改。**  
+ #### **``const`` 也可以用来声明变量，但是声明的是 ``常量`` 。``常量一旦声明，其值就不可再更改`` 。**  
         const PI = Math.PI;
         
         PI = 23;  // Module build failed: SyntaxError: /es6/app.js: "PI" is read-only
         
   ##### 当尝试去改变用const声明的常量时，浏览器就会报错。</br>
-  **const有个好应用场景，就是引用第三方库的变量时，用const来声明可以避免重命名而导致的bug**</br>
+  **``const有个好应用场景，就是引用第三方库的变量时，用const来声明可以避免重命名而导致的bug``**</br>
          
          const monent = require('moment')
         
- ### **类：class, 继承：extends, 超类：super**
+ ### **``类：`` ``class`` , ``继承：`` ``extends`` , ``超类：`` ``super``**
   ###### ES6 引入了Class（类）这个概念，新的class写法让对象原型的写法更清晰、更像面向对象编程的语法。
          
          class Animal {
