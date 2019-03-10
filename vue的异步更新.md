@@ -74,13 +74,18 @@
                   msn: '更新了？'
                }
             },
-            mounted: async function() {
-                  console.log(1)
-                  this.msn = '更新好了'
-                  console.log(this.$el.textContent)	// data数据未刷新
-                  await this.$nextTick(() => {
+            mounted() {
+                 this.updateMsn();
+            },
+            methods: {
+                 updateMsn: async function() {
+                    console.log(1)
+                    this.msn = '更新好了'
+                    console.log(this.$el.textContent)	// data数据未刷新
+                    await this.$nextTick(() => {
                         console.log(this.$el.textContent)	// data数据刷新了
-                  })
+                    })
+                 }
             }	
         }),
         new Vue({
