@@ -131,3 +131,67 @@
   ###### 上面代码定义了一个 ``Cat类``，该类通过  ``extends 关键字`` ,继承了 ``Animal 类`` 的 ``所有属性`` 和 ``方法``。
   ##### **``super关键字`` ,指代父类的实例（即 ``父类的this对象`` ）;  **``子类``** 必须在 ``constructor 方法`` 中 调用 ``super 方法`` ，否则新建实例时报错（因为 ``子类 没有自己的 this对象`` ,而是 ``继承父类的this对象`` ，再对其进行加工。），不调用 ``super 方法`` , ``子类`` 无法获取 ``this对象``。**
   ##### **Es6的继承机制，实质是 ``先创造父类的实例对象this（因而必须先调用 super方法 ）,再用 ``子类`` 的 ``构造函数方法`` 修改 ``this``。``**
+  
+  
+  ### **``箭头函数`` ：``arrow function ``**
+  
+  ``
+  function (i) { return i + 1; }  // es5
+  (i) => i + 1  // es6
+  ``
+  
+  #### **es6与es5差异：**
+      1.参数只有1个或者为空时，可以直接省略function
+      2.语法块只有1行时，可以直接省略 {}
+  
+  
+  #### **arrow function 对 ``this对象`` 有奇效
+      
+      ``
+      class Animal {
+          constructor () {
+              this.type = 'animal'
+          }
+          says(say) {
+              setTimeout(function () {
+                  console.log(this.type + 'says' + say)
+              }, 1000)
+          }
+      }
+      var animal = new Animal();
+      animal.says('hi');  // underfined says hi
+      
+  ###### 以上代码运行会报错，因为 ``seeTimeout`` 中的 ``this`` 指向的是  ``全局对象``。
+  ##### **setTimeout中所执行函数中的this，永远指向window！注意是要延迟执行的函数中的this哦！！**
+  
+  ##### 传统解决方案：
+   ###### 1.将 ``this`` 传给 ``self`` ，再用 ``self`` 指代 ``this``
+     says (say) {
+        var self = this;
+        setTimeout(function () {
+            console.log(self.type + 'says' + say)
+        }, 1000)
+     }
+   ###### 2.用 ``bind(this)``
+    says (say) {
+        setTimeout(function () {
+            console.log(self.type + 'says' + say)
+        }.bind(this), 1000)
+    }
+   
+   ##### 使用箭头函数，则简洁明了得多。
+   #### **箭头函数体内的 ``this对象``,就是 ``定义时所在的对象``，而 ``不是使用时所在的对象``。**
+   #### **箭头函数其实没有自己的 ``this``, ``它的this是继承外部的``, 因此 ``箭头函数内部的this就是外层代码块的this``。**
+    class Animal {
+        constructor () {
+            this.type = 'animal';
+        }
+        says (say) {
+            setTimeout( () => {
+                console.log(this.type + 'says' + say)
+            }, 1000)
+        }
+    }
+    var animal = new Animal();
+    animal.says('hi');  // animal says hi
+    
