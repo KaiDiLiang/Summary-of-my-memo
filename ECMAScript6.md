@@ -145,7 +145,7 @@
       2.语法块只有1行时，可以直接省略 {}
   
   
-  #### **arrow function 对 ``this对象`` 有奇效
+  #### **arrow function 对 ``this对象`` 有奇效**
       
       ``
       class Animal {
@@ -162,7 +162,7 @@
       animal.says('hi');  // underfined says hi
       
   ###### 以上代码运行会报错，因为 ``seeTimeout`` 中的 ``this`` 指向的是  ``全局对象``。
-  ##### **setTimeout中所执行函数中的this，永远指向window！注意是要延迟执行的函数中的this哦！！**
+  ##### **setTimeout中所执行函数中的this，永远指向window！注意是要延迟执行的函数中的this哦！**
   
   ##### 传统解决方案：
    ###### 1.将 ``this`` 传给 ``self`` ，再用 ``self`` 指代 ``this``
