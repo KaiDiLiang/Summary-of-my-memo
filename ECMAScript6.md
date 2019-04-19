@@ -14,7 +14,7 @@
   ### **``字符串模板`` :** ` \`` 可以换行写字符串`
   ### **``函数解构`` ：** ``destructuring`` 
   ### **``默认参数`` :** ``default``
-  ### **``?`` :** rest arguments
+  ### **```` :** rest arguments
   
   
 ## ***以下是示例***
@@ -216,3 +216,34 @@
       
       ``
    ##### 使用`` ` ``标识起始，用 ``${}`` 引用变量，所有的空格和缩进都会被保留
+
+
+
+   ### **``函数解构`` : ``destructuring``**
+   #### es6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，该模式称为解构。
+   
+   ``旧版
+   let cat = 'kai';
+   let dog = 'liang';
+   let zoo = {cat: cat, dog: dog};
+   console.log(zoo);  // object {cat: "kai", dog: "liang"}
+   
+   ``
+   
+   ``es6写法
+   let cat = 'kai';
+   let dog = 'liang';
+   let zoo = {cat, dog};
+   console.log(zoo);  // object {cat: "kai", dog: "liang"}
+   
+   ``
+   或
+   ``
+   let dog = {type: 'animal', many: 2};
+   let {type, many} = dog;
+   console.log(type, many);   // animal 2
+   
+   ``
+   
+   ### **``默认参数``: ``default``, ``rest``**
+   
