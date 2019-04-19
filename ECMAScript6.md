@@ -100,7 +100,7 @@
          
          const monent = require('moment')
         
- ### **``类`` ： ``class`` , ``继承`` ： ``extends`` , ``超类`` ： ``super``**
+ ### **``类`` ： ``class`` , ``继承`` ： ``extends`` , ``超类`` ： ``super``（相当于父类构造函数的调用）**
   ###### ES6 引入了Class（类）这个概念，新的class写法让对象原型的写法更清晰、更像面向对象编程的语法。
          
          class Animal {
