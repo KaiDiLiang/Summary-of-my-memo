@@ -129,7 +129,7 @@
   #### **即 **`` constructor ``** 内定义的 ``方法`` 和 ``属性`` 是 ``实例对象自己的``，而 `` constructor `` 外定义的 ``方法`` 和 ``属性`` 则是所有实例对象可以共享的。**
   ##### ``class`` 之间可通过 ``extends`` 关键字实现 ``继承``,这比es5的通过修改原型链实现继承要清晰得多。
   ###### 上面代码定义了一个 ``Cat类``，该类通过  ``extends 关键字`` ,继承了 ``Animal 类`` 的 ``所有属性`` 和 ``方法``。
-  #### **``super关键字`` ,指代父类的实例（即 ``父类的this对象`` ）;  **``子类``** 必须在 ``constructor 方法`` 中 调用 ``super 方法`` ，否则新建实例时报错（因为 ``子类 没有自己的 this对象`` ,而是 ``继承父类的this对象`` ，再对其进行加工。），不调用 ``super 方法`` , ``子类`` 无法获取 ``this对象``。**
+  #### ``super关键字`` ,指代父类的实例（即 ``父类的this对象`` ）;  **``子类``** 必须在 ``constructor 方法`` 中 调用 ``super 方法`` ，否则新建实例时报错（**``子类 没有自己的this对象`` ,而是 ``继承父类的this对象`` ，再对其进行加工。**），不调用 ``super 方法`` , ``子类`` 无法获取 ``this对象``。
   #### **Es6的继承机制，实质是 ``先创造父类的实例对象this（因而必须先调用 super方法 ）,再用 ``子类`` 的 ``构造函数方法`` 修改 ``this``。``**
   
   
@@ -195,3 +195,24 @@
     var animal = new Animal();
     animal.says('hi');  // animal says hi
     
+
+   ### **``模板字符串``: ``template string`` (用于插入大段html内容时)**
+   
+      ``旧版
+      $("#result").append(
+        "There are <b>" + basket.count + "</b>" + 
+        "items in your basket," + "<em>" + basket.onSale + 
+        "</em> are on sale!"
+      );
+      
+      ``
+      
+      ``使用es6的模板字符串
+      $("$result").append(`
+        There are <b>${basket.count}</b> items
+        in your basket, <em>${basket.onSale}</em>
+        are on sale!
+      `);
+      
+      ``
+   ##### 使用`` ` ``标识起始，用 ``${}`` 引用变量，所有的空格和缩进都会被保留
