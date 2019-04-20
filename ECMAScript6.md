@@ -306,42 +306,42 @@
    #### es6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，该模式称为解构。
    
    ``旧版数组
-     let cat1 = 'kai';
-     let dog1 = 'liang';
-     let zoo = {cat: cat1, dog: dog1};
-     console.log(zoo);  // object {cat: "kai", dog: "liang"}
+       let cat1 = 'kai';
+       let dog1 = 'liang';
+       let zoo = {cat: cat1, dog: dog1};
+       console.log(zoo);  // object {cat: "kai", dog: "liang"}
+
+       var arr = [1, 2, 3, 4];
+       var a = arr[0];
+       var b = arr[1];
+       var c = arr[2];
+       var d = arr[3];
+       console.log(a, b, c, d);   // 1 2 3 4
    
-     var arr = [1, 2, 3, 4];
-     var a = arr[0];
-     var b = arr[1];
-     var c = arr[2];
-     var d = arr[3];
-     console.log(a, b, c, d);   // 1 2 3 4
-   ``
    
-   ``es6数组解构
-     let cat = 'kai';
-     let dog = 'liang';
-     let zoo = {cat, dog};
-     console.log(zoo);  // object {cat: "kai", dog: "liang"} 
-     
-     let [a, b, c, d] = [1, 2, 3, 4];
-     console.log(a, b, c, d);   // 1 2 3 4
-   ``
+     es6数组解构
+       let cat = 'kai';
+       let dog = 'liang';
+       let zoo = {cat, dog};
+       console.log(zoo);  // object {cat: "kai", dog: "liang"} 
+
+       let [a, b, c, d] = [1, 2, 3, 4];
+       console.log(a, b, c, d);   // 1 2 3 4
    
-   ``es5对象
-     var luke = {occ: 'jeke', fat: 'anma'};
-     var occ = luke.occ;
-     var fat = luke.fat;
-     
-     console.log(occ, fat);   // jeke anma
-   ``
    
-   ``es6对象解构
-     let luke = {occ: 'jeke', fat: 'anma'};
-     let {occ, fat} = luke;
-     
-     console.log(occ, fat);   // jeke anma 
+     es5对象
+       var luke = {occ: 'jeke', fat: 'anma'};
+       var occ = luke.occ;
+       var fat = luke.fat;
+
+       console.log(occ, fat);   // jeke anma
+   
+   
+     es6对象解构
+       let luke = {occ: 'jeke', fat: 'anma'};
+       let {occ, fat} = luke;
+
+       console.log(occ, fat);   // jeke anma 
    ``
    
    
