@@ -20,9 +20,15 @@
 ## ***以下是示例***
   ### **``变量``：** ``let`` , ``const``  
    ##### 这两个的用途与var类似，都是用来声明变量的，但``let`` ``const``不存在变量提升，而``var``有。
-   ##### **``变量提升即将变量声明提升到它所在作用域的最开始的部分。``**
+   ##### **``变量提升：把变量声明提升到它所在作用域的最开始的部分。``**
   
-        ``变量提升  
+   ###### es5产生的var的变量提升  
+        ``  
+          console.log(global); // undefined
+          var global = 'global';
+          console.log(global); // global
+        
+        ``上面例子实际按以下方式运行
         
           var global;   // 变量提升，全局作用域范围内，此时只是声明，并没有赋值
           console.log(global);  // undefined
@@ -30,18 +36,18 @@
           console.log(global);  // global
         ``
   
-        ``
-        var name = 'aaa';
+   ###### es5中var只有全局作用域和函数作用域，没有块状作用域的概念
+   
+          var name = 'aaa';
 
-        while(true) {
-          var name = 'oba';
+          while(true) {
+            var name = 'oba';
+            console.log(name);  // oba
+            break;
+          }
+
           console.log(name);  // oba
-          break;
-        }
-
-        console.log(name);  // oba
-      
-   ##### 使用var两次输出都是oba,这是因为 ``ES5只有全局作用域和函数作用域，没有块状作用域的概念`` ，这带来了很多不合理的场景。
+     
    ##### es5不合理第一种是：内层变量覆盖外层变量。而 ``let则实际上为JavaScript新增了块状作用域，用它声明的变量，只在let所在的代码块内有效`` 。
        
        let name = 'aaa';
@@ -78,7 +84,7 @@
    
    
 ##### 如果不使用ES6，而用闭包该如何解决下面的问题呢？ 
-        ```
+        ``
           // 期待点击不同的clickBox,显示不同的i，但实际无论点击哪个clickBox，输出都为5
           var clickBoxs = document.querySelectorAll('.clickBox');
           for (var i = 0; i < clickBoxs.length; i++) {
@@ -86,8 +92,9 @@
               console.log(i);
             }
           }
-        ```
+        ``
    ###### 用闭包解决
+   
         function iteratorFactory (i) {
           var onclick = function (e) {
             console.log(i);
@@ -100,7 +107,8 @@
           clickBoxs[i].onclick = iteratorFactory(i);
         }
   
- #### **``const`` 也可以用来声明变量，但是声明的是 ``常量`` 。``常量一旦声明，其值就不可再更改`` 。**  
+ #### **``const`` 也可以用来声明变量，但是声明的是 ``常量`` 。``常量一旦声明，其值就不可再更改`` 。**
+ 
         const PI = Math.PI;
         
         PI = 23;  // Module build failed: SyntaxError: /es6/app.js: "PI" is read-only
@@ -139,7 +147,9 @@
   #### **即 **`` constructor ``** 内定义的 ``方法`` 和 ``属性`` 是 ``实例对象自己的``，而 `` constructor `` 外定义的 ``方法`` 和 ``属性`` 则是所有实例对象可以共享的。**
   ##### ``class`` 之间可通过 ``extends`` 关键字实现 ``继承``,这比es5的通过修改原型链实现继承要清晰得多。
   ###### 上面代码定义了一个 ``Cat类``，该类通过  ``extends 关键字`` ,继承了 ``Animal 类`` 的 ``所有属性`` 和 ``方法``。
+  
   #### ``super关键字`` ,指代父类的实例（即 ``父类的this对象`` ）;  **``子类``** 必须在 ``constructor 方法`` 中 调用 ``super 方法`` ，否则新建实例时报错（**``子类 没有自己的this对象`` ,而是 ``继承父类的this对象`` ，再对其进行加工。**），不调用 ``super 方法`` , ``子类`` 无法获取 ``this对象``。
+  
   #### **Es6的继承机制，实质是 ``先创造父类的实例对象this（因而必须先调用 super方法 ）,再用 ``子类`` 的 ``构造函数方法`` 修改 ``this``。``**
   
   
@@ -176,13 +186,16 @@
   
   ##### 传统解决方案：
    ###### 1.将 ``this`` 传给 ``self`` ，再用 ``self`` 指代 ``this``
+   
      says (say) {
         var self = this;
         setTimeout(function () {
             console.log(self.type + 'says' + say)
         }, 1000)
      }
+     
    ###### 2.用 ``bind(this)``
+   
     says (say) {
         setTimeout(function () {
             console.log(self.type + 'says' + say)
@@ -192,6 +205,7 @@
    ##### 使用箭头函数，则简洁明了得多。
    #### **箭头函数体内的 ``this对象``,就是 ``定义时所在的对象``，而 ``不是使用时所在的对象``。**
    #### **箭头函数其实没有自己的 ``this``, ``它的this是继承外部的``, 因此 ``箭头函数内部的this就是外层代码块的this``。**
+   
     class Animal {
         constructor () {
             this.type = 'animal';
@@ -206,9 +220,10 @@
     animal.says('hi');  // animal says hi
     
 
-   ### **``模板字符串``: ``template string`` (用于插入大段html内容时)**
+   ### **``模板字符串``: ``template string`` (``用于插入大段html内容时)**
    
-      ``旧版
+      ``es5
+      
       $("#result").append(
         "There are <b>" + basket.count + "</b>" + 
         "items in your basket," + "<em>" + basket.onSale + 
@@ -218,6 +233,7 @@
       ``
       
       ``使用es6的模板字符串
+      
       $("$result").append(`
         There are <b>${basket.count}</b> items
         in your basket, <em>${basket.onSale}</em>
@@ -233,25 +249,25 @@
    #### es6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，该模式称为解构。
    
    ``旧版
-   let cat = 'kai';
-   let dog = 'liang';
-   let zoo = {cat: cat, dog: dog};
-   console.log(zoo);  // object {cat: "kai", dog: "liang"}
+     let cat = 'kai';
+     let dog = 'liang';
+     let zoo = {cat: cat, dog: dog};
+     console.log(zoo);  // object {cat: "kai", dog: "liang"}
    
    ``
    
    ``es6写法
-   let cat = 'kai';
-   let dog = 'liang';
-   let zoo = {cat, dog};
-   console.log(zoo);  // object {cat: "kai", dog: "liang"}
+     let cat = 'kai';
+     let dog = 'liang';
+     let zoo = {cat, dog};
+     console.log(zoo);  // object {cat: "kai", dog: "liang"}
    
    ``
    或
    ``
-   let dog = {type: 'animal', many: 2};
-   let {type, many} = dog;
-   console.log(type, many);   // animal 2
+     let dog = {type: 'animal', many: 2};
+     let {type, many} = dog;
+     console.log(type, many);   // animal 2
    
    ``
    
