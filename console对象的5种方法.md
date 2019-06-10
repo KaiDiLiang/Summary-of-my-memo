@@ -1,4 +1,4 @@
-# <center>console对象的5种方法</center>
+# <p align="center">console对象的5种方法</p>
 
 ## <p>1.显示信息(5种方法都可以使用<a href="#A">printf风格的占位符</a>，只支持<strong>字符（%s）、<a href="#1">整数（%d 或 %i）</a>、浮点数（%f）、<a href="#2">对象（%o）</a></strong>)</p>
 ### <p align="left">console.table('可以把需要打印的对象的属性打印成table格式')</align>
@@ -10,17 +10,31 @@
 		console.error('错误信息')
 </br>
 
-## <p>2.分组显示</font>(信息过多时使用<em><a href="#b">console.group() 和 console.End()</a></em> )
+## <p>2.分组显示(信息过多时使用<em><a href="#b"><em><font color="green">console.group() 和 console.End()</a></font></em> )
 
-## <p>3.
+## <p>3.显示一个对象所有的属性和方法(<a href="#d"><em><font color="green">console.dir()</font></a>)
+
+## <p>4.显示网页的某个节点（node）所包含的html/xml代码(<a href="#e"><em><font color="green">console.dirxml()</font></a>)
+
+## <p>5.判断一个表达式或变量是否为真(<a href="#f"><em><font color="green">console.assert()</font></em></a>)
+
+## <p>6.追踪函数的调用轨迹(<a href="#g"><em><font color="green">console.trace()</font></em></a>)
+
+## <p>7.显示代码的运行时间(<a href="#f"><em><font color="green">console.time() 和 console.timeEnd()</font></em></a>)
+
+## <p>8.分析程序各个部分的运行时间(<a href="#j"><em><font color="green">console.profile()</font></em></a>)
+
+</br>
+</br>
+</br>
 
 ### ***<a name="A">a.占位符形式</a>*** 
-#### ***<center><a name="1">console.log(%d);</center></a>***
+#### ***<p align="center"><a name="1">console.log(%d);</p></a>***
 		
 				console.log('%d年%d月%d日', 2019,3,8);		// 2019年3月8日  
 				console.log('圆周率是%f', 3.1415926);		// 圆周率是3.1415926
 			
-#### ***<center><a name="2">console.log(%o);</a></center>***
+#### ***<p align="center"><a name="2">console.log(%o);</a></p>***
 			
 				var dog = {};  
 				dog.name = '大毛';  
@@ -28,7 +42,7 @@
 				console.log('%o', dog);		// {name: "大毛", color: "yellow"}  
 
 ### ***<font color="pink"><a name="b">b.分组显示</font>(信息过多时使用<em><font color="green">console.group() 和 console.End()</font></em> )</a>***
-#### <center>点击组标题则该组信息折叠或展开</center>
+#### <p align="center">点击组标题则该组信息折叠或展开</p>
 
 				console.group('第一组信息');
 				console.log('第一组第一条');
@@ -39,7 +53,7 @@
 				console.log('第二组第二条');
 				console.groupEnd();  
 
-### ***<font color="pink">d.显示一个对象所有的属性和方法</font>(<em><font color="green">console.dir()</font></em>)***
+### ***<font color="pink"><a name="d">d.显示一个对象所有的属性和方法</font>(<em><font color="green">console.dir()</font></em>)</a>***
 
 				var dog = {};
 				dog.name = '大毛';
@@ -52,14 +66,14 @@
 				// Object ,打印dog对象的所有属性及方法
 				console.dir(dog);
 
-### ***<font color="pink">e.显示网页的某个节点（node）所包含的html/xml代码</font>（<em><font color="green">console.dirxml()</font></em>)***
+### ***<font color="pink"><a name="e">e.显示网页的某个节点（node）所包含的html/xml代码</font>（<em><font color="green">console.dirxml()</font></em>)</a>***
 
 			var table = document,getElementById('table1');
 
 			console.dirxml(table);		// 显示该节点包含的代码  
 			
-### ***<font color="pink">f.判断一个表达式或变量是否为真</font>(<em><font color="green">console.assert()</font></em>)***
-#### <center>结果为否才会在控制台输出相应信息，并抛出一个异常</center>
+### ***<font color="pink"><a name="f">f.判断一个表达式或变量是否为真</font>(<em><font color="green">console.assert()</font></em></a>)***
+#### <p align="center">结果为否才会在控制台输出相应信息，并抛出一个异常</p>
 
 			var result = 0;
 			console.assert( result );		//  false, 控制台输出相应信息并抛出异常
@@ -67,7 +81,7 @@
 			var year = 2000;
 			console.assert( year == 2019 );		//  false, 控制台输出相应信息并抛出异常  
 			
-### ***<font color="pink">g.追踪函数的调用轨迹</font>((<em><font color="green">console.trace()</font></em>)***
+### ***<font color="pink"><a name="g">g.追踪函数的调用轨迹</font>((<em><font color="green">console.trace()</font></em></a>)***
 
 			function add(a, b) {
 			console.trace();
@@ -90,7 +104,7 @@
 			(a, b) => add1(a, b);
 			(a, b) => add(a, b);  
 			
-### ***<font color="pink">h.显示代码的运行时间</font>(<em><font color="green">console.time() 和 console.timeEnd()</font></em>)***
+### ***<font color="pink"><a name="h">h.显示代码的运行时间</font>(<em><font color="green">console.time() 和 console.timeEnd()</font></em>)</a>***
 
 			console.time('计时器一');
 			for( let i = 0; i < 1000; i++ ) {
@@ -99,7 +113,7 @@
 
 			console.timeEnd('计时器一');  
 			
-### ***<font color="pink">j.分析程序各个部分的运行时间</font>(<em><font color="green">console.profile()</font></em>)***
+### ***<font color="pink"><a name="j">j.分析程序各个部分的运行时间</font>(<em><font color="green">console.profile()</font></em>)</a>***
 
 			function Foo() {
 			for( var i = 0; i < 10; i++ ) {
