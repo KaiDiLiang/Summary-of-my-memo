@@ -1,6 +1,6 @@
 # <center>console对象的5种方法</center>
 
-## <p>显示信息(5种方法都可以使用<a href="#A">printf风格的占位符</a>，只支持<strong>字符（%s）、<a href="#1">整数（%d 或 %i）</a>、浮点数（%f）、<a href="#2">对象（%o）</a></strong>)</p>
+## <p>1.显示信息(5种方法都可以使用<a href="#A">printf风格的占位符</a>，只支持<strong>字符（%s）、<a href="#1">整数（%d 或 %i）</a>、浮点数（%f）、<a href="#2">对象（%o）</a></strong>)</p>
 ### <p align="left">console.table('可以把需要打印的对象的属性打印成table格式')</align>
 
 		console.log('显示信息')
@@ -9,6 +9,10 @@
 		console.warn('警告信息')
 		console.error('错误信息')
 </br>
+
+## <p>2.分组显示</font>(信息过多时使用<em><a href="#b">console.group() 和 console.End()</a></em> )
+
+## <p>3.
 
 ### ***<a name="A">a.占位符形式</a>*** 
 #### ***<center><a name="1">console.log(%d);</center></a>***
@@ -23,7 +27,7 @@
 				dog.color = 'yellow';  
 				console.log('%o', dog);		// {name: "大毛", color: "yellow"}  
 
-### ***<font color="pink">b.分组显示</font>(信息过多时使用<em><font color="green">console.group() 和 console.End()</font></em> )***
+### ***<font color="pink"><a name="b">b.分组显示</font>(信息过多时使用<em><font color="green">console.group() 和 console.End()</font></em> )</a>***
 #### <center>点击组标题则该组信息折叠或展开</center>
 
 				console.group('第一组信息');
