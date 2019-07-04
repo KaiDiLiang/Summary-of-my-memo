@@ -4,5 +4,5 @@
 
 
 
-#### 3. css Grid 实现页面盒子自适应 （chrome浏览器按f12可以模拟不同显示端的显示样式）
+#### 3. css Grid 实现页面盒子自适应 （鼠标拉动浏览器窗口大小可以观测到盒子的变化）
 ##### https://kaidiliang.github.io/helpping_of_front-end/public/pages/Grid-test/Css-grid.html
