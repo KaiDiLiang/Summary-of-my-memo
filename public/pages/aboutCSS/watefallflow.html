@@ -5,157 +5,191 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>CSS实现图片瀑布流</title>
+  <title>纯CSS实现图片瀑布流</title>
 </head>
 <style type="text/css">
-  html,
-  body,
-  li,
-  ul,
-  ol,
-  p,
-  div {
+  * {
     padding: 0;
     margin: 0;
     list-style: none;
     font-size: 16px;
     text-align: center;
   }
-
+  
   .container {
-    column-width: 100%;
-    -webkit-column-width: 250px;
-    -webkit-column-gap: 10px;
-    column-gap: 10px;
+    -moz-column-count: 3; /* firefox */
+    -webkit-column-count: 3; /* safari && chrome */
+    column-count: 3;  /* 3列布局 */
+    -moz-column-gap: 0.23rem;
+    -webkit-column-gap: 0.23rem; /* 列间距 */
+    column-gap: 0.23rem;
+    min-width: 70%;
+    margin: 1.2rem auto;
+    background-color: #f9f9f9f9;
+
   }
 
-  .container div {
-    width: 100%;
-    height: 200px;
-    margin: 5px 0;
-    /* 限定盒子内放大 */
-    /* overflow: hidden; */
+  .item {
+    -moz-page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;  /* 多列布局下元素中断的方式 */
+    vertical-align: middle; /* 元素垂直放置 */
+    text-align: center;
+    border: 1px solid #c2c2c2;
+    color: #c1c1c1;
+  }
+
+  .item .content-lar {
+    height: 11rem;
+  }
+  .item .content-mid {
+    height: 9rem;
+  }
+  .item .content-sma {
+    height: 7rem;
+  }
+  .div span {
+    height: 1rem;
   }
 
   .container img {
-    width: 100%;
-    height: 100%;
-    /* 规定显示的光标形状 */
-    cursor: pointer;
-    /* 过渡属性，动态效果过渡时间 */
-    transition: all 0.6s;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer; /* 规定显示的光标形状 */
+    transition: all 0.6s; /* 过渡属性，动态效果过渡时间 */
+    vertical-align: middle;
+    background-size: cover;
+    background-size: 100% 100%;
   }
 
   .container img:hover {
-    /* 元素应用2D或3D转换 */
-    transform: scale(1.4);
+    transform: scale(1.4); /* 元素应用2D或3D转换 */
+  }
+
+  /* 利用媒体查询属性，在不同宽度下设置瀑布流容器的column-count来自适应列数 */
+  @media screen and (max-width: 800px) {
+    .container {
+      column-count: 2;  /* 2columns on larger phones */
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .container {
+      column-count: 1;
+    }
   }
 </style>
 
 <body>
+  <h1>通过 Multi-columns 相关的属性 column-count、column-gap 配合 break-inside 来实现瀑布流布局</h1>
+  <div>
+    <p style="color: #c1c1c1;">.container 是瀑布流容器，里面放置了列表 item，在 .container 中设置 column-count（列数） 和 column-gap（列间距）</p>
+    <p style="color: #c1c1c1;">item 中设置 break-inside:avoid，控制文本块分解成单独的列，以免项目列表的内容跨列，破坏整体的布局。</p>
+  </div>
+
   <div class="container">
     <div class="item">
       <div class="item_img content-lar">
         <img src="../../pictures/watefallflow-img/watefallflow2.jpg">
-        <p>大标签</p>
       </div>
+      <span>大标签</span>
     </div>
     <div class="item">
       <div class="item_img content-sma">
         <img src="../../pictures/watefallflow-img/watefallflow3.jpg">
-        <p>小标签</p>
       </div>
+      <span>小标签</span>
     </div>
     <div class="item">
       <div class="item-img content-mid">
         <img src="../../pictures/watefallflow-img/watefallflow4.jpg">
-        <p>中等标签</p>
       </div>
+      <span>中标签</span>
     </div>
     <div class="item">
       <div class="item-img content-sma">
         <img src="../../pictures/watefallflow-img/watefallflow5.jpg">
-        <p>小标签</p>
       </div>
+      <span>小标签</span>
     </div>
     <div class="item">
       <div class="item-img content-mid">
         <img src="../../pictures/watefallflow-img/watefallflow6.jpg">
-        <p>中等标签</p>
       </div>
+      <span>中标签</span>
     </div>
     <div class="item">
       <div class="item-img content-lar">
         <img src="../../pictures/watefallflow-img/watefallflow7.jpg">
-        <p>大标签</p>
       </div>
-    </div>
-    <div class="item">
-      <div class="item-img content-mid">
-        <img src="../../pictures/watefallflow-img/watefallflow8.jpg">
-        <p>中等标签</p>
-      </div>
+      <span>大标签</span>
     </div>
     <div class="item">
       <div class="item-img content-sma">
-        <img src="../../pictures/watefallflow-img/watefallflow9.jpg">
-        <p>小标签</p>
+        <img src="../../pictures/watefallflow-img/watefallflow8.jpg">
       </div>
+      <span>小标签</span>
+    </div>
+    <div class="item">
+      <div class="item-img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow9.jpg">
+      </div>
+      <span>大标签</span>
     </div>
     <div class="item">
       <div class="item-img content-lar">
         <img src="../../pictures/watefallflow-img/watefallflow10.jpg">
-        <p>大标签</p>
       </div>
-    </div>
-    <div class="item">
-      <div class="item-img content-lar">
-        <img src="../../pictures/watefallflow-img/watefallflow11.jpg">
-        <p>大标签</p>
-      </div>
+      <span>大标签</span>
     </div>
     <div class="item">
       <div class="item-img content-sma">
-        <img src="../../pictures/watefallflow-img/watefallflow12.jpg">
-        <p>小标签</p>
+        <img src="../../pictures/watefallflow-img/watefallflow11.jpg">
       </div>
+      <span>小标签</span>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow12.jpg">
+      </div>
+      <span>中标签</span>
     </div>
     <div class="item">
       <div class="item-img content-mid">
         <img src="../../pictures/watefallflow-img/watefallflow13.jpg">
-        <p>中等标签</p>
       </div>
+      <span>中标签</span>
     </div>
     <div class="item">
-      <div class="item-img content-mid">
+      <div class="item-img content-lar">
         <img src="../../pictures/watefallflow-img/watefallflow14.jpg">
-        <p>中等标签</p>
       </div>
+      <span>大标签</span>
     </div>
     <div class="item">
-      <div class="item-img content-mid">
+      <div class="item-img content-sma">
         <img src="../../pictures/watefallflow-img/watefallflow15.jpg">
-        <p>中等标签</p>
       </div>
+      <span>小标签</span>
     </div>
     <div class="item">
       <div class="item-img content-sma">
         <img src="../../pictures/watefallflow-img/watefallflow16.jpg">
-        <p>小标签</p>
       </div>
+      <span>小标签</span>
     </div>
     <div class="item">
       <div class="item-img content-mid">
         <img src="../../pictures/watefallflow-img/watefallflow17.jpg">
-        <p>中等标签</p>
       </div>
+      <span>中等标签</span>
     </div>
     <div class="item">
       <div class="item-img content-lar">
         <img src="../../pictures/watefallflow-img/watefallflow18.jpg">
-        <p>大标签</p>
       </div>
+      <span>大标签</span>
     </div>
+  </div>
 </body>
 
 </html>
