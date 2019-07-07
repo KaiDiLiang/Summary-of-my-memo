@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,27 @@
   <title>CSS实现图片瀑布流</title>
 </head>
 <style type="text/css">
-  html,body,li,ul,ol,p,div {
+  html,
+  body,
+  li,
+  ul,
+  ol,
+  p,
+  div {
     padding: 0;
     margin: 0;
     list-style: none;
     font-size: 16px;
     text-align: center;
   }
+
   .container {
     column-width: 100%;
     -webkit-column-width: 250px;
     -webkit-column-gap: 10px;
     column-gap: 10px;
   }
+
   .container div {
     width: 100%;
     height: 200px;
@@ -27,6 +36,7 @@
     /* 限定盒子内放大 */
     /* overflow: hidden; */
   }
+
   .container img {
     width: 100%;
     height: 100%;
@@ -35,35 +45,117 @@
     /* 过渡属性，动态效果过渡时间 */
     transition: all 0.6s;
   }
+
   .container img:hover {
     /* 元素应用2D或3D转换 */
     transform: scale(1.4);
   }
 </style>
+
 <body>
   <div class="container">
-    <div>
-      <img src="../../pictures/watefallflow-img/watefallflow2.jpg">
-      <p>标签</p>
+    <div class="item">
+      <div class="item_img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow2.jpg">
+        <p>大标签</p>
+      </div>
     </div>
-    <div>
-      <img src="../../pictures/watefallflow-img/watefallflow3.jpg">
-      <p>标签</p>  
+    <div class="item">
+      <div class="item_img content-sma">
+        <img src="../../pictures/watefallflow-img/watefallflow3.jpg">
+        <p>小标签</p>
+      </div>
     </div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow4.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow5.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow6.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow7.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow8.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow9.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow10.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow11.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow12.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow13.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow14.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow15.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow16.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow17.jpg"></div>
-    <div><img src="../../pictures/watefallflow-img/watefallflow18.jpg"></div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow4.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-sma">
+        <img src="../../pictures/watefallflow-img/watefallflow5.jpg">
+        <p>小标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow6.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow7.jpg">
+        <p>大标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow8.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-sma">
+        <img src="../../pictures/watefallflow-img/watefallflow9.jpg">
+        <p>小标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow10.jpg">
+        <p>大标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow11.jpg">
+        <p>大标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-sma">
+        <img src="../../pictures/watefallflow-img/watefallflow12.jpg">
+        <p>小标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow13.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow14.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow15.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-sma">
+        <img src="../../pictures/watefallflow-img/watefallflow16.jpg">
+        <p>小标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-mid">
+        <img src="../../pictures/watefallflow-img/watefallflow17.jpg">
+        <p>中等标签</p>
+      </div>
+    </div>
+    <div class="item">
+      <div class="item-img content-lar">
+        <img src="../../pictures/watefallflow-img/watefallflow18.jpg">
+        <p>大标签</p>
+      </div>
+    </div>
 </body>
+
 </html>
