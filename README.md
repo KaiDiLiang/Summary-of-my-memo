@@ -1,8 +1,17 @@
-# helpping_of_front-end
+# <p align="center"><strong>helpping_of_front-end</strong></p>
 
-### 简单记录平时所用到的一些技术心得
+### <p align="center">简单记录平时所用到的一些技术心得,不拘泥于正统编码风格</p>
+
+#### 1. css Grid : 实现页面盒子自适应 （鼠标拉动浏览器窗口大小可以观测到盒子的变化）
+##### <p align="center">https://kaidiliang.github.io/helpping_of_front-end/public/pages/Grid-test/Css-grid.html</p>
+
+#### 2. css3 毛玻璃背景
+##### <p aling="center">https://kaidiliang.github.io/helpping_of_front-end/public/pages/aboutCSS/css_glass.html</p>
+
+#### 3.css 瀑布流图片
+##### <p align="center">https://kaidiliang.github.io/helpping_of_front-end/public/pages/aboutCSS/watefallflow.html</p>
+
+#### 3. 基于vue-cli的购物车
+##### <p align="center">https://github.com/KaiDiLiang/helpping_of_front-end/tree/master/public/pages/shopping</p>
 
 
-
-#### 3. css Grid 实现页面盒子自适应 （鼠标拉动浏览器窗口大小可以观测到盒子的变化）
-##### https://kaidiliang.github.io/helpping_of_front-end/public/pages/Grid-test/Css-grid.html
