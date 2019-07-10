@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>可从外部关闭的下拉菜单</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <div id="app" v-cloak>
+    <h4>
+      <p>实现：1.点击下拉菜单本身不会关闭2.点击菜单以外的所有区域都要关闭</p>
+      <P>思路：点击所有区域可以在document上绑定click事件实现，同时过滤出是否点击的是否在目标元素内部的元素即可</P>
+    </h4>
+    <div class="menu-box">
+      <div class="main" v-clickoutside="handleClose">
+        <button @click="show = !show">点击显示下拉菜单</button>
+        <!-- 逻辑：
+          点击按钮时显示class="dropdown"的div元素，而自定义指令v-clickoutside
+          绑定了函数 handleClose() 用于关闭菜单
+        -->
+        <div class="dropdown" v-show="show">
+          <say-hi></say-hi>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+<script type="text/javascript">
+  Vue.component('say-hi', {
+    data() {
+      return {
+        saySomething: '下拉框的内容，点击外面的区域可以关闭'
+      }
+    },
+    template: '<div>{{saySomething}}</div>'
+  })
+
+  /**
+   * 目的：(为了在document上绑定click事件)
+   * 方法：在bind钩子声明函数doucumentHandler,
+   *    并将它作为句柄绑定在document的click事件
+   * documentHandle() 做了2个判断：
+   *  1.用 contains() 判断点击区域是否在指令所在的元素内，是则跳出函数，不再向下执行
+   *  2.判断指令 v-clickoutside 有无写表达式，该指令中，表达式是一个函数
+   *    (该函数过滤内部元素后，点击外面任何区域应该执行用户表达式中的函数，
+   *      binding.value() 就是用来执行当前上下文 methods 中制定的函数)
+   */
+  Vue.directive('clickoutside', {
+    /**
+     * @param el 指令所绑定的元素
+     * @param binding {object}
+     * @param vnode vue编译的虚拟节点
+    */
+    bind: function (el, binding, vnode) {
+      function documentHandler(e) {
+        // contains() 判断元素A是否包含元素B，返回Boolean
+        if (el.contains(e.target)) {
+          return false;
+        }
+        if (binding.expression) {
+          binding.value(e);
+        }
+      }
+      el.__vueClickOutside__ = documentHandler;
+      document.addEventListener('click', documentHandler);
+    },
+    unbind: function (el, binding) {
+      document.removeEventListener('click', el.__vueClickOutside__);
+      delete el.__vueClickOutside__;
+    }
+  });
+
+  var vm = new Vue({
+    el: '#app',
+    data() {
+      return {
+        show: false
+      }
+    },
+    methods: {
+      handleClose() {
+        this.show = false
+      }
+    }
+  })
+</script>
+
+</html>
