@@ -4,7 +4,7 @@
 
 ---
 #### **目录**|
-**<a href="#快速入门">快速入门</a>** ： 1.<a herf="#1.数据类型和变量">数据类型和变量</a>  2.<a href="#2.字符串">字符串</a>  3.<a href="#3.数组">数组</a>  4.<a href="#4.对象">对象</a>   5.<a href="#5.条件判断">条件判断</a>   6.<a href="#6.循环">循环</a>    7.<a href="#7.Map和Set">Map和Set</a>  8.<a href="#8.iterable">iterable</a>
+**<a href="#快速入门">快速入门</a>** ： 1.<a href="#1.数据类型和变量">数据类型和变量</a>  2.<a href="#2.字符串">字符串</a>  3.<a href="#3.数组">数组</a>  4.<a href="#4.对象">对象</a>   5.<a href="#5.条件判断">条件判断</a>   6.<a href="#6.循环">循环</a>    7.<a href="#7.Map和Set">Map和Set</a>  8.<a href="#8.iterable">iterable</a>
 
 **<a href="#函数">函数</a>** ： 1.<a href="#1.函数定义和调用">函数定义和调用</a>   2.<a href="#2.变量作用域与解构赋值">变量作用域与解构赋值</a>  3.<a href="#3.方法">方法</a>    
 4.**<a href="#4.es6新增函数方法">es6新增函数方法</a>** ： ①. <a herf="#①.map/reduce">map/reduce</a>   ②. <a herf="#②.filter">filter</a>    ③. <a href="#③.sort">sort</a>    ④.<a href="#④.Array"> Array</a>
