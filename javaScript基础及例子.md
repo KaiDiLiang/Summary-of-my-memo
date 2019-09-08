@@ -1,4 +1,4 @@
-## <P align="center">1995年 ECMAScript第一版发布</p>
+## <P align="center">1995年 ECMAScript第一版发布于 1995年 </p>
 
 ### ECMAScript是一种语言标准，而JavaScript是网景公司对ECMAScript标准的一种实现。
 
