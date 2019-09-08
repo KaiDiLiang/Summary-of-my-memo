@@ -138,10 +138,37 @@ javaScript 在 HTML 中有两个特征：
 
                     console.log(str.charCodeAt(position));  // 返回字符串中指定索引的字符unicode编码
 
-                    
+                    console.log(str.split());   // 将字符串转换为数组
 
 ```                
 
 #### <a name="布尔值">③布尔值Boolean</a>
 
 #### <center>一个布尔值只有 `true, false` 两种值</center>
+
+```
+                        true;   // true
+                        false;  // false
+                        2 > 1;  // true
+                        2 >= 3;    // false
+```
+
+#### <center> `&&` 同真为true，有假则false; `||` 有真为true; `！` true变false，false变true</center>
+
+#### <center>javaScript 允许对任意数据类型做比较，需要注意 `相等运算符` , `==` : 会自动转换数据类型再比较，常会导致意外的结果； `===` ： 不会自动转换数据类型，数据类型不一致就返回false,一致再比较数值。 `因js的该设计缺陷，应坚持做比较时使用 === `
+
+#### <center>`NaN` 这个特殊的Number与所有其他值都不相等，包括其自身。 `只能通过isNaN()函数判断NaN` </center>
+
+#### <center> `浮点数的相等比较只能通过计算它们之差的绝对值，看是否小于某个阈值（原因是浮点数在运算过程中会产生误差，计算机无法精确标示无限循环小数）`</center>
+
+```
+                false == 0;     // true
+                false === 0;    // false
+
+                NaN === NaN;    // false
+                isNaN(NaN);     // true
+
+                1 / 3 === (1 - 2 / 3);    // false
+                Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001;      // true
+```
+
