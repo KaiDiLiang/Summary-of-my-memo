@@ -53,7 +53,11 @@ javaScript 在 HTML 中有两个特征：
 
 ####  `js中，除了原始值，都是对象（js对象是包含变量的变量，也可说 对象是键-值组成的无序集合,是动态类型）`
 
-#### <center>原始值(如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`</center>
+#### <p align="center">原始值(如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`</p>
+
+#### <p align="center">所有javaScript数据类型都有 `valueOf()` 和 `toString()` 方法。</p>
+
+---
 
 #### <a name="数值">①数值Number</a>
 
@@ -149,8 +153,58 @@ javaScript 在 HTML 中有两个特征：
                 (123).valueOf();     // 从文本123 返回 数值123
 
                 (100 + 23).valueOf();      // 从表达式100 + 23 返回 数值123
-                 
-```                
+
+```
+
+#### <p align="center">在javaScript中，数字可以是原始值(typeof = number) 或 对象(typeof = object) 。</p>
+
+#### <p align="center">在javaScript内使用 `valueOf()` 可将 `Number对象` 转换为 `原始值` ， 但没有理由在代码中使用它。</p>
+
+#### <p align="center">`可将变量转换为数字的3种全局javaScript方法(可用于所有javaScript数据类型)： 1.Number() 2.parseInt() 3.parseFloat()`</p>
+
+```
+        <!-- Number() 用于把javaScript变量转换为数值 -->
+            
+            var x = true;
+            Number(x);      // 返回 1
+
+            var y = false;
+            Number(y);      // 返回 0
+
+            var t = new Date();
+            Number(t);      // 返回 1568007739725
+
+            var str = "10";
+            Number(str);    // 返回 10
+
+            var str2 = "10 20";
+            Number(str2);   // 返回 NaN，无法转换为数字就返回NaN
+
+        <!-- parseInt() 解析一段字符串并返回数值，允许空格，但只返回首个数字  -->
+            
+            parseInt("10");     // 返回 10
+
+            parseInt("10.33");      // 返回 10
+
+            parseInt("10 20 30");       // 返回 10
+
+            parseInt("10 years");       // 返回 10
+
+            parseInt("years 10");       // 返回 NaN,无法转换为数值，则返回NaN
+
+        <!-- parseFloat() 解析一段字符串并返回数值，允许空格，但只返回首个数字 -->
+
+            parseFloat("10");       // 返回 10
+
+            parseFloat("10.33");    // 返回 10.33
+
+            parseFloat("10 20 30");     // 返回 10
+
+            parseFloat("10 years");     // 返回 10
+
+            parseFloat("years 10");     // 返回 NaN,无法转换为数值就返回NaN
+
+```
 
 #### <a name="字符串">②字符串String</a>
 
@@ -170,34 +224,34 @@ javaScript 在 HTML 中有两个特征：
 ```
                 var str = "abcdefghabcdefgh";
                 var str2 = "ABCDEFGHABCDEFGH" 
+            
+                str.length;    // 返回字符串长度 16
 
-                console.log(str.length);    // 返回字符串长度 16
-
-                console.log(str.indexOf("d"));    // 返回指定字符首次出现的索引,不存在则返回-1,第二个参数为起始检索位置,无法设置正则来检索  3
+                str.indexOf("d");    // 返回指定字符首次出现的索引,不存在则返回-1,第二个参数为起始检索位置,无法设置正则来检索  3
                 
-                console.log(str.lastIndexOf("d"))   // 返回指定字符最后一次出现的索引,第二参数为起始检索位置   11
+                str.lastIndexOf("d");   // 返回指定字符最后一次出现的索引,第二参数为起始检索位置   11
 
-                console.log(str.search("d"));   // 返回指定的特定值的位置,无法设置第二参数做起始检索位置
+                str.search("d");   // 返回指定的特定值的位置,无法设置第二参数做起始检索位置
 
-                console.log(str.slice(start, end));     // 提取字符串的某个部分并返回被提取的部分,参数为负则从字符串的尾部往回计数,省略第二参则返回字符串剩余部分
+                str.slice(start, end);     // 提取字符串的某个部分并返回被提取的部分,参数为负则从字符串的尾部往回计数,省略第二参则返回字符串剩余部分
 
-                console.log(str.substring(start, end));     // 类似slice(),但无法接受负的索引
+                str.substring(start, end);     // 类似slice(),但无法接受负的索引
 
-                console.log(str.substr(start, length));     // 类似slice(), 但第二参指定的是提取长度
+                str.substr(start, length);     // 类似slice(), 但第二参指定的是提取长度
 
-                console.log(str.replace("abc", 123));     // 用另一个值替换字符串中指定的值(大小写敏感,如需执行不敏感,用正则的 /i ),默认只替换首个匹配到的值(用正则 /g 可开启搜索整个字符串),且不会改变字符串的值,返回的是新字符串
-                console.log(str.replace(/ABC/i, 123));
-                console.log(str.replace(/abc/g, 123));
+                str.replace("abc", 123);     // 用另一个值替换字符串中指定的值(大小写敏感,如需执行不敏感,用正则的 /i ),默认只替换首个匹配到的值(用正则 /g 可开启搜索整个字符串),且不会改变字符串的值,返回的是新字符串
+                str.replace(/ABC/i, 123);
+                str.replace(/abc/g, 123);
 
-                console.log(str.toUpperCase());     // 字符串转换为大写,不改变原数据
+                str.toUpperCase();     // 字符串转换为大写,不改变原数据
 
-                console.log(str.toLowerCase());     // 字符串转换为小写，不改变原数据
+                str.toLowerCase();     // 字符串转换为小写，不改变原数据
 
-                console.log(str.concat('', str2));      // 连接两个或多个字符串,可替代 + 运算符,等同str + "" + str2
+                str.concat('', str2);      // 连接两个或多个字符串,可替代 + 运算符,等同str + "" + str2
 
--------------------------------------------------
-                console.log(str.trim());    // 删除字符串两端的空白符, IE8及以下不支持,可用正则搭配replace()代替
-                console.log(str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, ''));
+-----------------------------------------------------------------------------------------------------
+                str.trim();    // 删除字符串两端的空白符, IE8及以下不支持,可用正则搭配replace()代替
+                str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
                 
                 也可把trim函数添加到javascript String.prototype
                     if (!String.prototype.trim) {
@@ -207,12 +261,14 @@ javaScript 在 HTML 中有两个特征：
                     }
                     var str = "  用replace方案把trim函数添加到javascript String.prototype   ";
                     console.log(str.trim());
+
 -----------------------------------------------------
-                    console.log(str.charAt(position));      // 返回字符串中指定下标的字符
 
-                    console.log(str.charCodeAt(position));  // 返回字符串中指定索引的字符unicode编码
+                    str.charAt(position);      // 返回字符串中指定下标的字符
 
-                    console.log(str.split());   // 将字符串转换为数组
+                    str.charCodeAt(position);  // 返回字符串中指定索引的字符unicode编码
+
+                    str.split();   // 将字符串转换为数组
 
 ```                
 
@@ -229,11 +285,11 @@ javaScript 在 HTML 中有两个特征：
 
 #### <center> `&&` 同真为true，有假则false; `||` 有真为true; `！` true变false，false变true</center>
 
-#### <center>javaScript 允许对任意数据类型做比较，需要注意 `相等运算符` , `==` : 会自动转换数据类型再比较，常会导致意外的结果； `===` ： 不会自动转换数据类型，数据类型不一致就返回false,一致再比较数值。 `因js的该设计缺陷，应坚持做比较时使用 === `
+#### <p align="center">javaScript 允许对任意数据类型做比较，需要注意 `相等运算符` , `==` : 会自动转换数据类型再比较，常会导致意外的结果； `===` ： 不会自动转换数据类型，数据类型不一致就返回false,一致再比较数值。 `因js的该设计缺陷，应坚持做比较时使用 === `</p>
 
-#### <center>`NaN` 这个特殊的Number与所有其他值都不相等，包括其自身。 `只能通过isNaN()函数判断NaN` </center>
+#### <p align="center">`NaN` 这个特殊的Number与所有其他值都不相等，包括其自身。 `只能通过isNaN()函数判断NaN` </p>
 
-#### <center> `浮点数的相等比较只能通过计算它们之差的绝对值，看是否小于某个阈值（原因是浮点数在运算过程中会产生误差，计算机无法精确标示无限循环小数）`</center>
+#### <p align="center"> `浮点数的相等比较只能通过计算它们之差的绝对值，看是否小于某个阈值（原因是浮点数在运算过程中会产生误差，计算机无法精确标示无限循环小数）`</p>
 
 ```
                 false == 0;     // true
@@ -246,3 +302,4 @@ javaScript 在 HTML 中有两个特征：
                 Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001;      // true
 ```
 
+#### <a name="undefined">④undefine</a>
