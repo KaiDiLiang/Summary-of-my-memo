@@ -51,7 +51,7 @@ javaScript 在 HTML 中有两个特征：
 
 #### `Number, String, Boolean, Undefined, null 是原始数据类型，即没有属性或方法的数据（它们是硬编码，不能改变）；` 
 
-####  `js中，除了原始值，都是对象（js对象是包含变量的变量，也可说 对象是键-值组成的无序集合,是动态类型）`
+####  `js中，除了原始值，都是对象（js对象是包含变量的变量，也可说 对象是键-值组成的无序集合,是动态类型）, javaScript对象无法进行对比，哪怕两个对象的值一样，对比结果始终返回 false`
 
 #### <p align="center">原始值(如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`</p>
 
@@ -302,4 +302,4 @@ javaScript 在 HTML 中有两个特征：
                 Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001;      // true
 ```
 
-#### <a name="undefined">④undefine</a>
+#### <a name="undefined" name="null">④undefine和null</a>
