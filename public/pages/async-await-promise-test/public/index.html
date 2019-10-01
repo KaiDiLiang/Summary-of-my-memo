@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>利用axios(async/await)+vue+node构建简易充值功能</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 输入框区域start -->
+		<div style="height:50px">
+			<input type="text" placeholder="请输入电话号码" v-model="phoneNum">
+			<button @click="getFaceResult">确定</button>
+		</div>
+		<!-- 输入框区域end -->
+
+		<!-- 充值面值显示区域start -->
+		<div>
+			充值面值：
+			<span v-for="item in faceList" :key='item'>
+				{{item}}
+			</span>
+			<span>{{province}}-{{city}}-{{phoneNum}}</span>
+		</div>
+		<!-- 充值面值显示区域end -->
+	</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+		el: '#app',
+		data() {
+			return {
+				phoneNum: '',
+				faceList: [],
+				province: '',
+				city: ''
+			}
+		},
+		methods: {
+			/**
+			 *  获取到城市信息
+			 *  @parms phoneNum
+			 *  @api phoneLocation
+			 **/
+			getLocation(phoneNum) {
+				return axios.post('/phoneLocation', {
+					phoneNum
+				})
+			},
+			/**
+			 * 获取面值
+			 * @parms province, city
+			 * @api faceList
+			 **/
+			getFaceList(province, city) {
+				console.log(this.province, this.city)
+				return axios.post('/faceList', {
+					province,
+					city
+				})
+			},
+			async getFaceResult() {
+				// 简易写法，但是有点回调地狱start
+				// this.getLocation(this.phoneNum)
+				//     .then(res => {
+				//         if (res.status === 200 && res.data.success) {
+				//             let province = res.data.obj.province;
+				//             let city = res.data.obj.city;
+
+				//             this.getFaceList(province, city)
+				//                 .then(res => {
+				//                     if(res.status === 200 && res.data.success) {
+				//                         this.faceList = res.data.obj
+				//                     }
+				//                 })
+				//         }
+				//     })
+				//     .catch(err => {
+				//         console.log(err)
+				//     })
+				// 回调地狱end
+				try {
+					let location = await this.getLocation(this.phoneNum);
+					if (location.data.success) {
+						let province = location.data.obj.province;
+						let city = location.data.obj.city;
+
+						let result = await this.getFaceList(province, city);
+						if (result.data.success) {
+							this.faceList = result.data.obj;
+						}
+					}
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		}
+	})
+</script>
+
+</html>
