@@ -16,3 +16,6 @@
 
 #### 4.基于vue实现可从区域外部关闭的下拉菜单
 ##### <p align="center">https://kaidiliang.github.io/helpping_of_front-end/public/pages/click-out-side/clickoutside.html</p>
+
+#### 5.async&&await&&promise一些理解记录
+##### <p align="center">https://github.com/KaiDiLiang/helpping_of_front-end/blob/master/public/pages/async-await-promise-test/aboutAsync%26%26Await.md</p>
