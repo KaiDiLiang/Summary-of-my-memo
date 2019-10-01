@@ -45,7 +45,25 @@
 
 <strong><p>await</strong> ：作为关键字，`表示代码执行遇到它需要等待一下，不再向下执行，等待跟在其后的返回promise对象的表达式执行完毕并取得promise resolve的返回值再继续向下执行。` 但是，`只能放到async函数里面，它后面可以放任何表达式，常放的是一个返回promise对象的表达式`。</p>
 
-&ensp;&ensp; `async函数返回的是一个promise对象，要拿到promise的返回值，需用then方法`
+##### 带async关键字的函数，返回值必定是promise对象,其实就是把返回值包装成promise对象。
+<p>&ensp;&ensp;如果带async的函数返回的不是promise,会自动用Promise.resolve()包装。</p>
+<p>&ensp;&ensp;如果带async关键字的函数显式地返回promise,那就以你返回的promise为准。</p>
+
+```
+                async function fn1() {
+                    return 123;
+                }
+
+                function fn2() {
+                    return 123;
+                }
+
+                console.log(fn1());     // Promise{<resolved>: 123}
+                console.log(fn2());     // 123
+
+```
+
+##### async函数返回的是一个promise对象，要拿到promise的返回值，需用then()
 
 ```
 
@@ -92,6 +110,9 @@
 
 #### 通过 `then()的链式调用或catch()调用` ,每次调用后都会返回 `新promise对象`
 
+#### <a name="resolve">Promise.resolve()</a>
+#### <a name="reject">Promise.reject()</a>
+
 ```
                 var testPromise = new Promise((resolve, reject) => {
                     // 异步处理
@@ -131,7 +152,9 @@
 
                 testPromise.then(value => value * 2);
 
-                testPromise.then(value => console.log("1" + value));        // 打印出 11,因为每次调用then()使用的是不同的promise对象,除非连续调用then()才会导致结果不同
+                // 因为每次调用then()使用的是不同的promise对象,除非连续调用then()才会导致结果不同
+                
+                testPromise.then(value => console.log("1" + value));        // 打印出 11
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -151,9 +174,12 @@
                 promise.then(onFulfilled, onRejected);
 ```
 
+---
+
 ###### 出现异常的情况时采用，只指定onRejected回调函数即可，不过更推荐使用catch()
 
-##### `promise.catch()` 是 `Promise.then(undefined, onRejected)的别名`，用来注册当 `promise对象状态变为Rejected的回调函数`
+#### <a name="catch">promise.catch()</a>
+ `promise.catch()`是 `Promise.then(undefined, onRejected)的别名`，用来注册当 `promise对象状态变为Rejected的回调函数`
 
 ```
 
@@ -177,10 +203,9 @@
 
 ```
 
-##### Promise异步调用的操作：
+---
 
-先后打印出 1, 2, 3;
-代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。
+##### Promise异步调用的操作：
 
 ```
             var testPromise = new Promise(resolve => {
@@ -193,8 +218,10 @@
             console.log(2);
         
 ```
+<p>先后打印出 1, 2, 3。</br>
+<p>代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。</p></br>
 
-##### 理解是同步调用还是异步调用：
+#### 理解是同步调用还是异步调用：
 
 先输出"我是同步加载的，先执行我；"，再输出其后的其他console.log()语句，然后到"DOM Load Success;",最后才到setTimeout().</br>
 
@@ -221,11 +248,11 @@
 
 ---
 
-#### Promise.all()
+#### <a name="all">Promise.all()</a>
 
-<strong>可以接受 `一个Promise对象的数组` 作为参数，只有 `作为参数的该数组内的所有promise对象都变为resolve`时，Promise.all()才会返回结果。</strong>
+<strong>可以接受 `一个Promise对象的数组` 作为参数，只有 `作为参数的该数组内的所有promise对象都变为resolve或都变为rejected`时，Promise.all()才会继续后面的处理。</strong>
 
-<p>多用于需要发起2个ajax请求时，不管其先后顺序，在2个请求同时成功的结果后才执行某些操作的情况。</p>
+<p>多用于需要发起2个ajax请求时，不管其先后顺序，在2个请求返回的promise对象状态同时变为FulFilled或Rejected后才执行某些操作的情况。</p>
 
 ```
                 var testPromise = new Promise(resolve => 
@@ -243,5 +270,50 @@
                 因此结果才出现按照数组的原顺序返回的结果
 
 ```
+---
 
 #### Promise.race()
+
+`只要参数中有一个promise对象进入FulFilled或Rejected状态,程序就会停止,且会继续后面的处理逻辑`
+
+```
+                var testPromiseRace = delay => {
+                    return new Promise(resolve => setTimeout(
+                        resolve(delay)), delay);
+                };
+
+                Promise.race([
+                    testPromiseRace(1),
+                    testPromiseRace(32),    
+                    testPromiseRace(64),
+                    testPromiseRace(128)
+                ]).then(value => console.log(value));       // 获取到第1个返回值后跳出代码块，直接执行后续的then()
+
+                Promise.all([
+                    testPromiseRace(1),
+                    testPromiseRace(32),    
+                    testPromiseRace(64),
+                    testPromiseRace(128)
+                ]).then(value => console.log(value));       // [1, 32, 64, 128]
+
+```
+
+<p>上面代码创建了4个promise对象，分别设置在1ms, 32ms, 64ms, 128ms 后变为确定状态，Promise.race()在获取到第一个返回值后跳出代码块，直接执行后续的then()；Promise.all()则会等全部promise对象返回才执行后续的then()。</p>
+
+```
+                var runPromise = new Promise(resolve => setTimeout(() => {
+                    console.log(1);
+                    resolve(2);
+                }, 500));
+
+                var runPromise2 = new Promise(resolve => setTimeout(() => {
+                    console.log(3);
+                    resolve(4);
+                }, 1000));
+
+                Promise.race([runPromise, runPromise2]).then(
+                    value => console.log(value)         // 1 2 3
+                );
+
+```
+<p></p>
