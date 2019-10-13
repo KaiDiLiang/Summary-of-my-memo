@@ -99,19 +99,59 @@
 
 ### <p align="center">Promise对象</p>
 
-##### <p>`promise对象` 可以理解为一次必然执行的异步操作，在将来的某个时间点触发一个函数调用。</p>
-<strong><p>用处：</strong>1.使用 `promise对象` 之后可以使用一种 `链式调用` 的方式来组织代码; 2.避免 `回调地狱`; 3.避免`同步或异步混乱`的问题; 4.在 `异步执行的流程中` ，把 `执行代码` 和 `处理结果的代码` 清晰地 `分离`。</p>
+##### <p>`promise对象` 是一个构造函数，用来生成 `Promise实例` ,可以理解为一次必然执行的异步操作，在将来的某个时间点触发一个函数调用。</p>
 
-<strong><p>常用方法有 ：</strong> <a href="#resolve">resolve</a> , <a href="#reject">reject</a> , <a href="#then">then</a> , <a href="#catch">catch</a> , <a href="#all">all</a> ,一般通过 `new Promise()` 创建 `promise对象`, 但是也可以用 `promise.resolve()` 和 `promise.reject()` 快捷创建。</p>
+&nbsp;<p>`构造函数是一种特殊的方法，用于创建对象并赋予初始值`</p>
 
-<strong><p>`promise` 有3种状态 ：</strong> `Resolve(onFulfilled)` , `Reject(onRejected)` , `Pending()`</p>
+```
+                // 创建一个Promise实例,左边是promise实例,右边是promise对象
 
-&ensp;<p align="center">对通过 `new` 生成的 `promise对象` ，为了设置其值在 `resolve/reject` 时调用的 `回调函数`，可以使用 `promise.then()`</p>
+                    const promiseExample = new Promise((resolve, reject) => {
+                        // ... some code
+
+                        if (/* 异步操作成功 */) {
+                            resolve(value);
+                        } else {
+                            reject(error);
+                        }
+                    })
+
+```
+
+##### `Promise构造函数` 接受`一个函数作为参数` , 该函数提供的两个参数分别是 `resolve` 和 `reject`。
+
+<strong><p>`promise` 有3种状态 ：</strong> `Resolved(FulFilled)` , `Rejected` , `Pending` 。</p>
+
+&ensp;&ensp;`resolve`函数：将`Promise对象`的状态从`Pending`变为`Resolved`,在异步操作成功时调用,并将异步操作的结果,作为参数传递出去。
+&ensp;&ensp;`reject`函数：将`Promise对象`的状态从`Pending`变为`Rejected`,在异步操作失败时调用,并将异步操作报的错误,作为参数传递出去。
+</br>
+
+#### Promise对象特点：
+##### <p>&ensp;&ensp;&ensp;1.`对象的状态不受外界影响。`<p><p>&ensp;&ensp;&ensp;&ensp;只有异步操作的结果，可以决定当前是哪一种状态，其他任何操作都无法改变这个状态。</p>
+##### <p>&ensp;&ensp;&ensp;2.`一旦状态改变，就不会再变，任何时候都可以得到这个结果。`</p><p>&ensp;&ensp;&ensp;&ensp;`promise对象`的状态改变，只有两种可能：①从 `pending` 变 `fulFilled`; ②从 `pending` 变 `rejected`。</br></p><p>&ensp;&ensp;&nbsp;&nbsp;只要有这两种情况中的一种发生，状态就不会再变了，会一直保持这个结果，这时称为`resolved(已定型)`。如果改变已经发生，再对`promise对象`添加回调函数，立即得到的也是这个结果。</p>
+##### `promise跟事件(Event)完全不同。事件的特点是：如果错过了它，再去监听是得不到结果的。而promise哪怕其状态改变已经发生，再对promise对象添加回调函数，依然可以得到结果。`
+</br>
+
+#### 用处：
+&ensp;&ensp;&ensp;&ensp;1.使用 `promise对象` 之后可以使用 `链式调用` 的方式来组织代码; </br>&ensp;&ensp;&ensp;&ensp;2.将异步操作以同步操作的流程表达出来，避免 `回调地狱`;</br>&ensp;&ensp;&ensp;&ensp;3.提供了统一的接口，控制异步操作更容易，避免`同步或异步混乱`的问题; </br>&ensp;&ensp;&ensp;&ensp;4.在 `异步执行的流程中` ，把 `执行代码` 和 `处理结果的代码` 清晰地 `分离`。</p>
+</br>
+
+#### 缺点：
+&ensp;&ensp;&ensp;&ensp;1.无法取消`Promise`,一旦新建就会立即执行，无法中途取消。</br>&ensp;&ensp;&ensp;&ensp;2.如果不设置`回调函数`, `Promise` 内部抛出的错误不会反应到外部。</br>&ensp;&ensp;&ensp;&ensp;3.当处于 `pending` 状态时，无法得知进展到哪一阶段(刚开始还是即将完成)。
+</br>
+
+#### 常用方法有 ：
+&ensp;&ensp;&ensp;&ensp;<a href="#resolve">resolve</a> , <a href="#reject">reject</a> , <a href="#then">then</a> , <a href="#catch">catch</a> , <a href="#all">all</a> , <a href="#race">race</a>
+
+&nbsp;<p>一般通过 `new Promise()` 创建 `promise对象`, 但是也可以用 `promise.resolve()` 和 `promise.reject()` 快捷创建。</p></br>
+
+<strong><p>对通过 `new` 生成的 `promise对象` ，为了设置其值在 `resolved/rejected` 状态时的 `回调函数`，可以使用 `then()`</p></strong>
 
 #### 通过 `then()的链式调用或catch()调用` ,每次调用后都会返回 `新promise对象`
 
-#### <a name="resolve">Promise.resolve()</a>
-#### <a name="reject">Promise.reject()</a>
+---
+
+#### <a name="resolve">Promise.resolve()</a> / <a name="reject">Promise.reject()</a>
 
 ```
                 var testPromise = new Promise((resolve, reject) => {
@@ -218,8 +258,9 @@
             console.log(2);
         
 ```
-<p>先后打印出 1, 2, 3。</br>
-<p>代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。</p></br>
+<p>先后打印出 1, 2, 3。</p>
+
+&ensp;<p>代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。</p></br>
 
 #### 理解是同步调用还是异步调用：
 
@@ -250,7 +291,7 @@
 
 #### <a name="all">Promise.all()</a>
 
-<strong>可以接受 `一个Promise对象的数组` 作为参数，只有 `作为参数的该数组内的所有promise对象都变为resolve或都变为rejected`时，Promise.all()才会继续后面的处理。</strong>
+<strong>可以接受 `一个Promise对象的数组` 作为参数，只有 `作为参数的该数组内的所有promise对象都变为resolved或都变为rejected`时，Promise.all()才会继续后面的处理。</strong>
 
 <p>多用于需要发起2个ajax请求时，不管其先后顺序，在2个请求返回的promise对象状态同时变为FulFilled或Rejected后才执行某些操作的情况。</p>
 
@@ -272,7 +313,7 @@
 ```
 ---
 
-#### Promise.race()
+#### <a name="race">Promise.race()</a>
 
 `只要参数中有一个promise对象进入FulFilled或Rejected状态,程序就会停止,且会继续后面的处理逻辑`
 
@@ -298,7 +339,7 @@
 
 ```
 
-<p>上面代码创建了4个promise对象，分别设置在1ms, 32ms, 64ms, 128ms 后变为确定状态，Promise.race()在获取到第一个返回值后跳出代码块，直接执行后续的then()；Promise.all()则会等全部promise对象返回才执行后续的then()。</p>
+&ensp;<p>上面代码创建了4个promise对象，分别设置在1ms, 32ms, 64ms, 128ms 后变为确定状态，`Promise.race()在获取到第一个返回值后跳出代码块，直接执行后续的then();Promise.all()则会等全部promise对象返回才执行后续的then()。`</p>
 
 ```
                 var runPromise = new Promise(resolve => setTimeout(() => {
@@ -316,4 +357,5 @@
                 );
 
 ```
-<p></p>
+
+<p>上面代码使用定时器调用，上面是2个promise对象，第一个promise对象过500ms后加入到执行队列里，执行队列没有其他线程在运行的时候，就执行该定时器，所以第一次打印1，然后调用resolve(2); 接着调用promise.race()，该方法只要有一个变为成功状态(FulFiled)的时候，程序就会停止，因此打印出2，同时后面的promise对象接着执行，因此打印出3，但是由于promise.race()该方法已停止调用，所以resolve(4)不会有任何输出；因此最后输出1，2，3</p>
