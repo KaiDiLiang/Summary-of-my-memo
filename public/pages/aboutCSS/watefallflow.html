@@ -191,5 +191,29 @@
     </div>
   </div>
 </body>
-
+<script type="text/javascript">
+	var Browser = new Object();
+	Browser.userAgent = window.navigator.userAgent.toLowerCase();
+	Browser.ie = /msie/.test(Browser.userAgent);
+	Browser.Moz = /gecko/.test(Browser.userAgent);
+	function SImage(url, callback) {
+		var img = new Image();
+		if (Browser.ie) {
+			img.onreadystatechange = function () {
+				if (img.readyState == "complete" || img.readyState == "loaded") {
+					ii = i + 1;
+					callback(i);
+				}
+			}
+		} else if (Browser.Moz) {
+			img.onload = function () {
+				if (img.complete == true) {
+					ii = i + 1;
+					callback(i);
+				}
+			}
+		}
+		img.src = url;
+	}
+</script>
 </html>

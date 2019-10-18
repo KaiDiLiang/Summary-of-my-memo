@@ -104,7 +104,7 @@
 &nbsp;<p>`构造函数是一种特殊的方法，用于创建对象并赋予初始值`</p>
 
 ```
-                // 创建一个Promise实例,左边是promise实例,右边是promise对象
+                // 创建一个Promise实例
 
                     const promiseExample = new Promise((resolve, reject) => {
                         // ... some code
@@ -129,7 +129,7 @@
 #### Promise对象特点：
 ##### <p>&ensp;&ensp;&ensp;1.`对象的状态不受外界影响。`<p><p>&ensp;&ensp;&ensp;&ensp;只有异步操作的结果，可以决定当前是哪一种状态，其他任何操作都无法改变这个状态。</p>
 ##### <p>&ensp;&ensp;&ensp;2.`一旦状态改变，就不会再变，任何时候都可以得到这个结果。`</p><p>&ensp;&ensp;&ensp;&ensp;`promise对象`的状态改变，只有两种可能：①从 `pending` 变 `fulFilled`; ②从 `pending` 变 `rejected`。</br></p><p>&ensp;&ensp;&nbsp;&nbsp;只要有这两种情况中的一种发生，状态就不会再变了，会一直保持这个结果，这时称为`resolved(已定型)`。如果改变已经发生，再对`promise对象`添加回调函数，立即得到的也是这个结果。</p>
-##### `promise跟事件(Event)完全不同。事件的特点是：如果错过了它，再去监听是得不到结果的。而promise哪怕其状态改变已经发生，再对promise对象添加回调函数，依然可以得到结果。`
+##### `promise对象跟事件(Event)完全不同。事件的特点是：如果错过了它，再去监听是得不到结果的。而promise哪怕其状态改变已经发生，再对promise对象添加回调函数，依然可以得到结果。`
 </br>
 
 #### 用处：
@@ -138,38 +138,83 @@
 
 #### 缺点：
 &ensp;&ensp;&ensp;&ensp;1.无法取消`Promise`,一旦新建就会立即执行，无法中途取消。</br>&ensp;&ensp;&ensp;&ensp;2.如果不设置`回调函数`, `Promise` 内部抛出的错误不会反应到外部。</br>&ensp;&ensp;&ensp;&ensp;3.当处于 `pending` 状态时，无法得知进展到哪一阶段(刚开始还是即将完成)。
+
+```
+            let testPromise = new Promise((resolve, reject) => {
+                console.log('①：promise建立后立即执行');
+                resolve();
+            });
+            testPromise.then(() => console.log('②:then()指定的回调函数在当前脚本所有同步任务完成后才执行'));
+            console.log('③同步任务比then()的回调函数早执行');
+
+```
+上面代码中，`Promise`新建后立即执行，所以先输出①，然后,`then()指定的回调函数，在当前脚本所有同步任务执行完才执行`，所以结果是①③②。
 </br>
 
-#### 常用方法有 ：
+#### Promise常用方法有 ：
 &ensp;&ensp;&ensp;&ensp;<a href="#resolve">resolve</a> , <a href="#reject">reject</a> , <a href="#then">then</a> , <a href="#catch">catch</a> , <a href="#all">all</a> , <a href="#race">race</a>
 
-&nbsp;<p>一般通过 `new Promise()` 创建 `promise对象`, 但是也可以用 `promise.resolve()` 和 `promise.reject()` 快捷创建。</p></br>
-
-<strong><p>对通过 `new` 生成的 `promise对象` ，为了设置其值在 `resolved/rejected` 状态时的 `回调函数`，可以使用 `then()`</p></strong>
-
-#### 通过 `then()的链式调用或catch()调用` ,每次调用后都会返回 `新promise对象`
-
 ---
+
+一般通过 `new Promise()` 创建 `promise对象`, 但是也可以用 `promise.resolve()` 和 `promise.reject()` 快捷创建。
+</br>
 
 #### <a name="resolve">Promise.resolve()</a> / <a name="reject">Promise.reject()</a>
 
 ```
-                var testPromise = new Promise((resolve, reject) => {
-                    // 异步处理
-                    // 成功调用resolve  往下传递参数，且只接受一个参数
-                    // 失败调用reject  往下传递参数，且只接受一个参数
-                })
+            var testPromise = new Promise((resolve, reject) => {
+                // 异步处理
+                // 成功调用resolve  往下传递参数，且只接受一个参数
+                // 失败调用reject  往下传递参数，且只接受一个参数
+            })
 
-                // Promise.resolve(value) 的返回值也是一个promise对象
-                // resolve(11) 会让promise对象进入resolve状态，并将参数11传递给后面的then所指定的onFulfilled函数
+            // Promise.resolve(value) 的返回值也是一个promise对象
+            // resolve(11) 会让promise对象进入resolve状态，并将参数11传递给后面的then所指定的onFulfilled函数
 
-                    Promise.resolve(11).then(value => console.log(value))    // 打印出 11
-                             
-                    new Promise((resolve, reject) => reject(new Error("我是错的")))
+                Promise.resolve(11).then(value => console.log(value))    // 打印出 11
+                            
+                new Promise((resolve, reject) => reject(new Error("我是错的")))
 
 ```
 
-#### <a name="then">通过then()的链式调用或catch()调用 ,每次调用后都会返回`新promise对象`</a>
+</br>
+---
+#### <a name="then">Promise.then()</a>
+
+<strong><p>对通过 `new` 生成的 `promise对象` ，为了设置其值在 `resolved/rejected` 状态时的 `回调函数`，可以使用 `then()`</p></strong>
+
+&nbsp;&nbsp;&nbsp;&nbsp;`then()` 可以接受`两个回调函数作为参数`。
+&nbsp;&nbsp;&nbsp;&nbsp;第一个回调函数是`Promise对象的状态变为resolved时调用`,第二个回调函数是`Promise对象的状态变为rejected时调用`。
+&nbsp;&nbsp;&nbsp;&nbsp;`第二个回调函数是可选的，不一定要提供。`
+&nbsp;&nbsp;&nbsp;&nbsp;`两个回调函数都接受Promise对象传出的值作为参数。`
+
+```
+                var test = bool => {
+                    return new Promise((resolve, reject) => {
+                        if (bool) {
+                            resolve('t')
+                        } else {
+                            reject('f')
+                        }
+                    })
+                }
+                test(false).then(value => console.log(value),e => console.log(e));
+
+```
+
+```
+            // 一个promise对象的简单例子
+
+                function test(ms) {
+                    return new Promise((resolve, reject) => setTimeout(resolve, ms, 'done'))
+                };
+                test(100).then(value => console.log(value));
+
+```
+上面代码，`test()`返回一个`promise实例`，表示一段时间后才会发生的结果。过了指定的时间（`ms参数`）后，`promise实例`的状态变为`resolved`，就会触发`then()`绑定的回调函数。
+</br>
+
+#### 通过`then()的链式调用`或`catch()调用` ,每次调用后都会返回`新promise对象`
 
 ```
                 
@@ -184,7 +229,7 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 
-            // 该种then()调用几乎是同事开始进行，且传给每个then的value都是1
+            // 该种then()调用几乎是同时开始进行，且传给每个then的value都是1
 
                 var testPromise = new Promise(resolve => resolve(1));
 
@@ -203,8 +248,7 @@
                 var testPromise = new Promise(resolve => resolve(1));
 
                 testPromise.then(value => value * 2).then(
-                    value => value * 2).then(
-                        value => "1" + value)     // 打印出 14
+                    value => value * 2).then(value => "1" + value)     // 打印出 14
 
 ```
 
@@ -215,6 +259,7 @@
 ```
 
 ---
+</br>
 
 ###### 出现异常的情况时采用，只指定onRejected回调函数即可，不过更推荐使用catch()
 
@@ -245,7 +290,7 @@
 
 ---
 
-##### Promise异步调用的操作：
+#### Promise异步调用的操作：
 
 ```
             var testPromise = new Promise(resolve => {
@@ -260,8 +305,26 @@
 ```
 <p>先后打印出 1, 2, 3。</p>
 
-&ensp;<p>代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。</p></br>
+代码从上往下执行，先输出了1，再调用resolve(3)，这时候promise对象变为确定状态(即调用onFulFilled方法)，因此第一个函数是成功调用的，但`promise对象是以异步方式调用的`,所以先执行console.log(2),输出2，最后才输出3。
+</br>
 
+```
+            // 实现异步加载图片
+
+                var loadImageAsync = url => {
+                    return new Promise((resolve, reject) => {
+                        const images = new Image();
+                        
+                        images.onload = () => resolve(images);
+
+                        images.onerror = () => reject(new Error('Cound not load images at' + url));
+
+                        images.src = url;
+                    })
+                } 
+
+```
+</br>
 #### 理解是同步调用还是异步调用：
 
 先输出"我是同步加载的，先执行我；"，再输出其后的其他console.log()语句，然后到"DOM Load Success;",最后才到setTimeout().</br>
