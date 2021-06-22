@@ -20,12 +20,77 @@ HTML中，新加入的 `loclStorage` 特性，主要是 `用来作为本地存�
     <li>不能被爬虫抓取到</li></br>
 </ol>
 
+#### localStorage的应用方式及场景
+![avatar](/public/pictures/localStorage&session&cookie-img/浏览器对localStorage的支持性.jpg)
+
+**<p>如果是IE浏览器的话，那么要用UserData来作为存储</p>**
+
+##### 判断浏览器是否支持LocalStorage属性
+
+```
+        if (window.localStorage) {
+            console.log("浏览器支持localStorage");
+        } else {
+            alert("浏览器版本低，不支持localStorage,请升级版本");
+        }
+```
+
+##### localStorage属性的3种写入方法
+
+```
+        var storageData = window.localStorage;
+        
+        storageData["A"] = 1;
+        
+        storageData.B = 2;
+        
+        storageData.setItem("C", 3);
+        
+        console.log(typeof(storageData["a"]));
+
+        console.log(typeof(storageData["b"]));
+
+        console.log(typeof(storageData["c"]));
+
+        console.log(typeof(storageData));
+
+```
+**存储进去的int类型，打印出来string类型，这与localStorage的特点有关，``localStorage只支持string类型的存储``**
+<p>结果如下：</p>
+
+![avatar](/public/pictures/localStorage&session&cookie-img/localStorage属性写入.png)
+
+##### localStorage属性的3种读取方法
+**<p>官方推荐的是getItem()/setItem()来进行存取</p>**
+
+```
+        var storageData = window.localStorage;
+
+        storageData.a = 'A';
+
+        storageData.b = 'B';
+
+        storageData.c = 'C';
+
+        console.log(storageData['a']);
+
+        console.log(storageData.b);
+
+        console.log(storageData.getItem('c'));
+
+
+```
+
+
+
+---
+
 #### localStorage , cookie , session 三者的不同：
 
-&ensp;&ensp;&ensp;&ensp; **localStorage** ：存于`浏览器端` ，`永久性存储` 。
+&ensp;&ensp;&ensp;&ensp; **localStorage** ：`永久性存储` ，存于`浏览器端` ，属于webStorage的一个API。
 </br>
 
-&ensp;&ensp;&ensp;&ensp; **cookie** ：存于`浏览器端` ，`临时会话`,只能以`文本的形式保存字符串类型`，`单个cookie保存的数据不能超过4kb。`。 `服务器发给客户端的特殊信息，每次请求时都带上它,安全性不如session`(cookie欺骗，cookie截获)。
+&ensp;&ensp;&ensp;&ensp; **cookie** ：`临时会话`, 存于`浏览器端` ，只能以`文本的形式保存字符串类型`，`单个cookie保存的数据不能超过4kb。`。 `服务器发给客户端的特殊信息，每次请求时都带上它,安全性不如session`(cookie欺骗，cookie截获)。
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在浏览器中`不设置过期时间时，cookie存于内存中，生命周期随浏览器的关闭而结束`；
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在浏览器中`设置cookie过期时间时，则存于硬盘中，关闭浏览器后，cookie直到过期时间结束才消失`。
@@ -67,8 +132,9 @@ HTML中，新加入的 `loclStorage` 特性，主要是 `用来作为本地存�
     <li>用户可以操作(禁用)cookie，使功能受限</li>
     <li>安全性较低，sessionId存于cookie中，攻击先会从cookie开始，常见cookie欺骗，cookie截获</li>
     <li>有些状态不可保存在客户端</li>
-    <li>每次访问都要传送cookie给服务器，浪费带宽</li>
+    <li>每次访问都要传送cookie给服务器，随HTTP事务一起被发送的cookie浪费带宽</li>
     <li>cookie数据有path的概念，可以限制cookie只属于某个路径下。</li>
+    <li>正确操纵cookie是很困难的</li>
 </ol>
 </br>
 
@@ -92,4 +158,20 @@ HTML中，新加入的 `loclStorage` 特性，主要是 `用来作为本地存�
 
 ---
 #### webStorage
-Web Storage分两种： `sessionStorage` 和 `localStorage` ，这两个`是Storage的一个实例`。
+**WebStorage**分两种： `sessionStorage` 和 `localStorage` ，这两个`是Storage的一个实例`。
+
+**作用**：1. 提供在cookie之外存储会话数据的方式 2. 提供一种可存储大量可跨会话存在的数据的存储机制
+<p>使用webStorage可以在客户端本地建立一个数据库，原本必须保存在服务器端数据库中的内容现在可以直接保存在客户端本地，大大减轻了服务器端的负担，也加快了数据的交互速度。</p>
+
+**webStorage相较cookie的优点:**</br><ol><li>存储空间更大：</br>cookie只有4kb;</br>webStorage有5MB</li></br><li>节省网络流量：</br>webStorage存储数据在本地，可以直接获取，减少与服务器的交互，节省了网络流量；</br>而cookie每次请求都会带上HTTP事务传到服务端</li></br><li>对于那种只需要在用户浏览一组页面期间保存而关闭浏览器后就可丢弃的数据，sessionStorage会非常方便;</br>cookie则需要设置过期时间，不设置则生命周期随浏览器关闭而结束，设置则需要等过期时间到了才结束生命周期</li></br><li>快速显示：</br>有些非敏感数据存储在webStorage，加上浏览器本身的缓存，获取数据只需从服务器获取一部分，速度更快</li></br><li>安全性:</br>webStorage不会随着HTTP header发送到服务器端，所以安全性相对于与服务器端重交互的cookie来说要高一点，不用担心截获，但仍然存在伪造问题。</li></br><li>webStorage提供了一些方法，数据操作比cookie方便：</br>①以键值对的方式存储信息： setItem(key, value); ②传入键值获取对应得value: getItem(key); ③根据键值移除对应单个的信息： removeItem(key); ④删除所有数据： clear(); ⑤获取某个索引的key: key(index)</li></ol>
+</br>
+
+**sessionStorage:** `会话存储`，`将数据保存在session对象中`，即用户在浏览某个网站时，`从进入网站到浏览器关闭这段时间内`所需要保存的任何数据保存在session对象中。刷新页面或者进入同源另一个页面，数据依旧存在；`独立的打开的同一个窗口同一个页面，sessionStorage不同`。</br>
+
+
+**localStorage:** `本地存储`, `将数据保存在客户端本地的硬件设备，即使浏览器关闭，保存的数据依旧存在`，下次打开浏览器访问网站时仍然可以继续使用。
+</br>
+
+##### `sessionStorage` 与 `localStorage` 的异同：</br><ol></br><li>sessionStorage是临时保存数据的对象，浏览器关闭就消除；</br>localStorage是永久保存数据的对象。</li></br><li>存储大小一般都是5MB</li></br><li>都保存在客户端。不与服务端交互通信</li></br><li>只能存储字符串类型，复杂的对象要使用JSON对象的stringify和parse来处理</li></br><li>获取方式:</br>window.localStorage ;</br> window.sessionStorage</li></br><li>应用场景：</br>localStorage常用于长期登录(用于判断用户是否登录),适合长期保存在本地的数据 ；</br> sessionStorage用于敏感账号一次性登录</li></ol>
+
+![avatar](public/pictures/localStorage&session&cookie-img/cookie&sessuin&webStorage的差异.png)

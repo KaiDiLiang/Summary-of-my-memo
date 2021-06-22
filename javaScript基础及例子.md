@@ -21,47 +21,45 @@
 ### <a name="快速入门">快速入门</a>
 #### js引入及位置
 ##### javaScript  可直接嵌在网页的任意位置，一般把 js 放在 `<head>` 里，不过出于性能的合理性，把 js 放置于 `<body>的底部` 或者使用 es6 的 `async` 解决 js 置于HTML顶部可能引发的不良问题。
- 
-``` 
-javaScript 在 HTML 中有两个特征： 
-                              1.阻塞后面内容的呈现 
-                              2.阻塞其后组件的下载
-```
+ </br>
 
-##### <P align="center">js文件在下载后，后面都会有一段 code executing 时间,因此每个js文件的阻塞时间：***js下载所需时间 + 执行时间***</p>
+>jS在HTML中有两个特征： 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.阻塞后面内容的呈现 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.阻塞其后组件的下载
 
-###### 如果js在 `<head>` 中，因 DOM 从上往下解析的特性，就很容易出现因 js 的阻塞时间过长而导致页面长时间空白。
-### ***`因此 js 最好放置于 <head> 后，或者使用 es6 的 async 或 defer`***
+**js文件在下载后，后面都会有一段 code executing 时间,因此每个js文件的阻塞时间：`js下载所需时间 + 执行时间`**
 
-```
-    async (后续文档元素的加载、渲染  与  js的加载与执行  并行进行(异步)，无法保证顺序 )
-        <script async src="script.js"></script>
+如果js在 `<head>` 中，因 DOM 从上往下解析的特性，就很容易出现因 js 的阻塞时间过长而导致页面长时间空白。
 
-    defer (后续文档元素的加载  与 js的加载  并行进行(异步)，有顺序，但js的执行 要在所有元素解析完成后，DOMContentLoaded事件触发前  完成，脚本延迟到文档解析和显示后执行)
-        <script defer src="script.js"></script>
+***因此 js 最好放置于 <head> 后，或者使用 es6 的 async 或 defer***
 
-        但 script.js 的执行 在所有元素解析完成后， DOMContentLoaded事件触发前 完成
-```
+**async (后续文档元素的加载、渲染  与  js的加载与执行  并行进行(异步)，无法保证顺序 )**
+    <p align='center'>`<script async src="script.js"></script>`<p>
 
------------------------------------------------------------------------------------------------------------------------------
+**defer (后续文档元素的加载  与 js的加载  并行进行(异步)，有顺序，但js的执行 要在所有元素解析完成后，DOMContentLoaded事件触发前  完成，脚本延迟到文档解析和显示后执行)**
+    <p align='center'>`<script defer src="script.js"></script>`</p>
+
+**但 script.js 在 `所有元素解析完成后执行`， `DOMContentLoaded事件触发前完成`**
+
+---
 
 #### 1.<a name="1.数据类型和变量">数据类型和变量</a>
 
 ##### 数据类型 ： 1.<a href="#数值">数值Number</a>  2.<a href="#字符串">字符串String</a>   3.<a href="#布尔值">布尔值Boolean</a>   4.<a href="#undefined">undefined</a>    5.<a href="#null">null</a>   6.<a href="#对象">对象</a>
 
-#### `Number, String, Boolean, Undefined, null 是原始数据类型，即没有属性或方法的数据（它们是硬编码，不能改变）；` 
+>`Number, String, Boolean, Undefined, null 是原始数据类型，即没有属性或方法的数据（它们是硬编码，不能改变）；` 
 
-####  `js中，除了原始值，都是对象（js对象是包含变量的变量，也可说 对象是键-值组成的无序集合,是动态类型）, javaScript对象无法进行对比，哪怕两个对象的值一样，对比结果始终返回 false`
+**`js中，除了原始值，都是对象`（js对象是包含变量的变量，也可说 对象是键-值组成的无序集合,是动态类型）, javaScript对象无法进行对比，哪怕两个对象的值一样，对比结果始终返回 false**
 
-#### <p align="center">原始值(如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`</p>
+**`原始值`**: 如3.14 或 2016， `无法拥有属性和方法(因它们不是对象)`，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性时将原始值视为对象`。</p>
 
-#### <p align="center">所有javaScript数据类型都有 `valueOf()` 和 `toString()` 方法。</p>
+**所有javaScript数据类型都有 `valueOf()` 和 `toString()` 方法。**
 
 ---
 
 #### <a name="数值">①数值Number</a>
 
-#### <p align="center">`js不区分整数和浮点数，统一用Number表示`</p>
+#### js不区分整数和浮点数，统一用Number表示
 
 ```
                         123;    // 整数123
@@ -74,7 +72,7 @@ javaScript 在 HTML 中有两个特征：
 
 由于计算机使用 `二进制` ,有时候用 `十六进制` 表示整数比较方便， `十六进制用0x前缀和0-9、a-f表示` , 如 ： `0xff00, 0xa5b5c3d2` 。
 
-#### <center>`Number 可以做四则运算，规则和数学一致`</center>
+#### Number 可以做四则运算，规则和数学一致
 
 ```
                         1 + 2;  // 3
@@ -85,11 +83,11 @@ javaScript 在 HTML 中有两个特征：
                         10.5 % 3;   // 1.5
 ```
 
-#### <center>原始值(如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`</center>
+***原始值 : (如3.14 或 2016)， 无法拥有属性和方法(因它们不是对象)，但通过javaScript，方法和属性也可用于原始值， `因为javaScript在 执行方法和属性 时将 原始值 视为 对象`***
 
 #### 常用方法：
 
-<p align="center">所有数字方法可用于任意类型的数字(字面量、变量或表达式)</p>
+**所有数字方法可用于任意类型的数字(字面量、变量或表达式)**
 
 ```
             <!-- toString() 以字符串返回数值 -->
@@ -156,11 +154,11 @@ javaScript 在 HTML 中有两个特征：
 
 ```
 
-#### <p align="center">在javaScript中，数字可以是原始值(typeof = number) 或 对象(typeof = object) 。</p>
+**在jS中，数字可以是原始值(typeof = number) 或 对象(typeof = object) 。**
 
-#### <p align="center">在javaScript内使用 `valueOf()` 可将 `Number对象` 转换为 `原始值` ， 但没有理由在代码中使用它。</p>
+在javaScript内使用 `valueOf()` 可将 `Number对象` 转换为 `原始值` ， 但没有理由在代码中使用它。
 
-#### <p align="center">`可将变量转换为数字的3种全局javaScript方法(可用于所有javaScript数据类型)： 1.Number() 2.parseInt() 3.parseFloat()`</p>
+##### 可将变量转换为数字的3种全局javaScript方法(可用于所有javaScript数据类型)： `1.Number()` ;  `2.parseInt()` ; `3.parseFloat()`
 
 ```
         <!-- Number() 用于把javaScript变量转换为数值 -->
@@ -210,7 +208,7 @@ javaScript 在 HTML 中有两个特征：
 
 以单引号 ' 或双引号 " 括起来的任意文本， ' ' 或 " " 本身只是一种表示方式，不是字符串的一部分；字符串中含需要输出的引号时，使用 `\转义字符` 。
 
-#### <center>通常，js字符串是原始值，但是，也可通过 `关键字new` 定义为对象, ***不建议这样做，会拖慢性能及产生不可预估的结果*** 。</center>
+**通常，js字符串是原始值，但是，也可通过 `关键字new` 定义为对象, ***不建议这样做，会拖慢性能及产生不可预估的结果*** 。**
 
 ```
             var x = "bill";
@@ -222,84 +220,84 @@ javaScript 在 HTML 中有两个特征：
 
 ##### 常用方法：
 ```
-                var str = "abcdefghabcdefgh";
-                var str2 = "ABCDEFGHABCDEFGH" 
+            var str = "abcdefghabcdefgh";
+            var str2 = "ABCDEFGHABCDEFGH" 
+        
+            str.length;    // 返回字符串长度 16
+
+            str.indexOf("d");    // 返回指定字符首次出现的索引,不存在则返回-1,第二个参数为起始检索位置,无法设置正则来检索  3
             
-                str.length;    // 返回字符串长度 16
+            str.lastIndexOf("d");   // 返回指定字符最后一次出现的索引,第二参数为起始检索位置   11
 
-                str.indexOf("d");    // 返回指定字符首次出现的索引,不存在则返回-1,第二个参数为起始检索位置,无法设置正则来检索  3
-                
-                str.lastIndexOf("d");   // 返回指定字符最后一次出现的索引,第二参数为起始检索位置   11
+            str.search("d");   // 返回指定的特定值的位置,无法设置第二参数做起始检索位置
 
-                str.search("d");   // 返回指定的特定值的位置,无法设置第二参数做起始检索位置
+            str.slice(start, end);     // 提取字符串的某个部分并返回被提取的部分,参数为负则从字符串的尾部往回计数,省略第二参则返回字符串剩余部分
 
-                str.slice(start, end);     // 提取字符串的某个部分并返回被提取的部分,参数为负则从字符串的尾部往回计数,省略第二参则返回字符串剩余部分
+            str.substring(start, end);     // 类似slice(),但无法接受负的索引
 
-                str.substring(start, end);     // 类似slice(),但无法接受负的索引
+            str.substr(start, length);     // 类似slice(), 但第二参指定的是提取长度
 
-                str.substr(start, length);     // 类似slice(), 但第二参指定的是提取长度
+            str.replace("abc", 123);     // 用另一个值替换字符串中指定的值(大小写敏感,如需执行不敏感,用正则的 /i ),默认只替换首个匹配到的值(用正则 /g 可开启搜索整个字符串),且不会改变字符串的值,返回的是新字符串
+            str.replace(/ABC/i, 123);
+            str.replace(/abc/g, 123);
 
-                str.replace("abc", 123);     // 用另一个值替换字符串中指定的值(大小写敏感,如需执行不敏感,用正则的 /i ),默认只替换首个匹配到的值(用正则 /g 可开启搜索整个字符串),且不会改变字符串的值,返回的是新字符串
-                str.replace(/ABC/i, 123);
-                str.replace(/abc/g, 123);
+            str.toUpperCase();     // 字符串转换为大写,不改变原数据
 
-                str.toUpperCase();     // 字符串转换为大写,不改变原数据
+            str.toLowerCase();     // 字符串转换为小写，不改变原数据
 
-                str.toLowerCase();     // 字符串转换为小写，不改变原数据
-
-                str.concat('', str2);      // 连接两个或多个字符串,可替代 + 运算符,等同str + "" + str2
+            str.concat('', str2);      // 连接两个或多个字符串,可替代 + 运算符,等同str + "" + str2
 
 -----------------------------------------------------------------------------------------------------
-                str.trim();    // 删除字符串两端的空白符, IE8及以下不支持,可用正则搭配replace()代替
-                str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-                
-                也可把trim函数添加到javascript String.prototype
-                    if (!String.prototype.trim) {
-                        String.prototype.trim = function () {
-                            return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-                        }
+            str.trim();    // 删除字符串两端的空白符, IE8及以下不支持,可用正则搭配replace()代替
+            str.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+            
+            也可把trim函数添加到javascript String.prototype
+                if (!String.prototype.trim) {
+                    String.prototype.trim = function () {
+                        return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
                     }
-                    var str = "  用replace方案把trim函数添加到javascript String.prototype   ";
-                    console.log(str.trim());
+                }
+                var str = "  用replace方案把trim函数添加到javascript String.prototype   ";
+                console.log(str.trim());
 
------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 
-                    str.charAt(position);      // 返回字符串中指定下标的字符
+            str.charAt(position);      // 返回字符串中指定下标的字符
 
-                    str.charCodeAt(position);  // 返回字符串中指定索引的字符unicode编码
+            str.charCodeAt(position);  // 返回字符串中指定索引的字符unicode编码
 
-                    str.split();   // 将字符串转换为数组
+            str.split();   // 将字符串转换为数组
 
 ```                
 
 #### <a name="布尔值">③布尔值Boolean</a>
 
-#### <center>一个布尔值只有 `true, false` 两种值</center>
+**一个布尔值只有 `true, false` 两种值**
 
 ```
-                        true;   // true
-                        false;  // false
-                        2 > 1;  // true
-                        2 >= 3;    // false
+            true;   // true
+            false;  // false
+            2 > 1;  // true
+            2 >= 3;    // false
 ```
 
-#### <center> `&&` 同真为true，有假则false; `||` 有真为true; `！` true变false，false变true</center>
+**`&&` 同真为true，有假则false； `||` 有真为true； `！` true变false，false变true**
 
-#### <p align="center">javaScript 允许对任意数据类型做比较，需要注意 `相等运算符` , `==` : 会自动转换数据类型再比较，常会导致意外的结果； `===` ： 不会自动转换数据类型，数据类型不一致就返回false,一致再比较数值。 `因js的该设计缺陷，应坚持做比较时使用 === `</p>
+**jS `允许对任意数据类型做比较`，注意 `相等运算符` ， `==` : 会自动转换数据类型再比较，常会导致意外的结果； `===` ： 不会自动转换数据类型，数据类型不一致就返回false,一致再比较数值。 `因js的该设计缺陷，应坚持做比较时使用 === `**
 
-#### <p align="center">`NaN` 这个特殊的Number与所有其他值都不相等，包括其自身。 `只能通过isNaN()函数判断NaN` </p>
+**`NaN` 这个特殊的Number与所有其他值都不相等，包括其自身。 `只能通过isNaN()函数判断NaN`**
 
-#### <p align="center"> `浮点数的相等比较只能通过计算它们之差的绝对值，看是否小于某个阈值（原因是浮点数在运算过程中会产生误差，计算机无法精确标示无限循环小数）`</p>
+**浮点数的相等比较只能通过计算它们之差的绝对值，看是否小于某个阈值**（`原因是浮点数在运算过程中会产生误差，计算机无法精确标示无限循环小数）`
 
 ```
-                false == 0;     // true
-                false === 0;    // false
+            false == 0;     // true
+            false === 0;    // false
 
-                NaN === NaN;    // false
-                isNaN(NaN);     // true
+            NaN === NaN;    // false
+            isNaN(NaN);     // true
 
-                1 / 3 === (1 - 2 / 3);    // false
-                Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001;      // true
+            1 / 3 === (1 - 2 / 3);    // false
+            Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001;      // true
 ```
 
 #### <a name="undefined" name="null">④undefine和null</a>
